@@ -1,0 +1,30 @@
+[{
+    "id": "0",
+    "index": "/pc_char",
+    "ico": "el-icon-s-shop",
+    "text": "首页"
+  },
+  {
+    "id": "1",
+    "index": "1",
+    "ico": "el-icon-location",
+    "text": "派车",
+    "menu": [
+      { "id": "pcDpc", "index": "/pc_did_not_car", "text": "待派车" , "ico": "el-icon-thumb"},
+      { "id": "1-2", "index": "/pc_have_sent_car", "text": "已派车" , "ico": "el-icon-thumb"}
+    ]
+  },
+  {
+    "id": "2",
+    "index": "2",
+    "ico": "el-icon-s-operation",
+    "text": "派车管理",
+    "menu": [{ "id": "pcDpc", "index": "/pc_setCar", "text": "车辆管理" , "ico": "el-icon-thumb"}]
+  },
+  {
+    "id": "3",
+    "index": "/pc_pactCar",
+    "ico": "el-icon-bicycle",
+    "text": "一键约车"
+  }
+]
