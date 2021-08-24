@@ -12,5 +12,6 @@ module.exports = {
             }
 
         }
-    }
+    },
+    publicPath:'/vehicle_manager-1.0-SNAPSHOT/',   //解决打包直接打开页面空白
 }
