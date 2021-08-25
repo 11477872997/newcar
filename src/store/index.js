@@ -5,9 +5,6 @@ import createPersistedState from "vuex-persistedstate"   ///vuex 持久化
 Vue.use(Vuex)
 //创建VueX对象
 const store = new Vuex.Store({
-    plugins: [createPersistedState({
-        storage: window.sessionStorage
-    })],
     state: {
         username: '', //用户名
         Did_not_send:"",//未派车
@@ -34,7 +31,12 @@ const store = new Vuex.Store({
         setUsername(state, value) {  //用户名
             state.username = value;
         }
-    }
+    },
+    plugins: [createPersistedState({
+        storage: window.sessionStorage
+        
+    })],
 })
 
 export default store
+

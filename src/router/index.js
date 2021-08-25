@@ -148,6 +148,15 @@ const router = new Router({
                 roles: ['admin']
             },
         },
+        {   //h5车辆管理
+            path: '/h5_setcar',
+            name: "h5_setcar",
+            component: () => import('../views/h5/h5_setcar'),
+            meta: {
+                title: '车辆管理',
+                roles: ['admin']
+            },
+        },
     ]
 })
 

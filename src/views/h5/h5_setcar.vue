@@ -1,24 +1,30 @@
-<!-- 移动端首页 -->
+<!-- 车辆管理 -->
 <template>
-<div id='h5_Index'>
-    <menus/>
+<div class='h5_setcar'>
+    <Tb :Text="{...propsText}"></Tb>
+    <setcatCar/>
 </div>
 </template>
 
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import menus from "../../components/h5/h5_index/h5_men.vue";
+import Tb from '../../components/h5/h5_tb.vue'
+import setcatCar from '../../components/h5/h5_setcar/setcat_car.vue'
 export default {
-  name: 'h5_Index',
+  name: 'h5_setcar',
 //import引入的组件需要注入到对象中才能使用
 components: {
-  menus
+    Tb,
+    setcatCar
 },
 data() {
 //这里存放数据
 return {
-
+ propsText: {
+        num: 1,
+        Titletext: "车辆管理",
+    },
 };
 },
 //监听属性 类似于data概念
@@ -31,11 +37,10 @@ methods: {
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-  
+
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
-
 },
 beforeCreate() {}, //生命周期 - 创建之前
 beforeMount() {}, //生命周期 - 挂载之前

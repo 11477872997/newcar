@@ -99,6 +99,7 @@ methods: {
                       // sessionStorage.setItem("username", res.data.username);  //用户名
                         this.$store.commit("setUsername", res.data.username) //用户名
                       if (this.isMobile()) {
+                       
                          this.$message(res.data.msg);
                         //  移动端触发
                         this.$router.push({ path: "/h5_home" });
@@ -138,7 +139,7 @@ methods: {
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-      sessionStorage.clear();   //清除缓存和vuex的值
+      // sessionStorage.clear();  
        let objs = { 
                 currTabsItem: '',
                 currTabsPath: '',
@@ -153,6 +154,7 @@ mounted() {
     var show_num = [];
     draw(show_num,'canvas','100','40');
     this.num = show_num.join("");
+       sessionStorage.clear();   //清除缓存和vuex的值
 },
 }
 </script>

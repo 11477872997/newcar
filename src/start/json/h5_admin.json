@@ -25,7 +25,7 @@
         "text": "车辆管理",
         "badge":"",
         "icon":"setting-o",
-        "to":""
+        "to":"/h5_setcar"
     },
     {
         "id": "4",

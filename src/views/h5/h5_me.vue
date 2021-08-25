@@ -13,7 +13,6 @@
 import Tb from '../../components/h5/h5_tb.vue'
 import mexx from '../../components/h5/h5_me/me_xx.vue'
 import meMen from '../../components/h5/h5_me/me_men.vue'
-
 export default {
   name: 'h5_me',
 //import引入的组件需要注入到对象中才能使用
@@ -41,11 +40,9 @@ methods: {
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
-    
 },
 beforeCreate() {}, //生命周期 - 创建之前
 beforeMount() {}, //生命周期 - 挂载之前
