@@ -101,7 +101,7 @@ methods: {
                       if (this.isMobile()) {
                          this.$message(res.data.msg);
                         //  移动端触发
-                        this.$router.push({ path: "/h5_index" });
+                        this.$router.push({ path: "/h5_home" });
                       }else{
                         //  pc 端触发
                         // per ：类型 

@@ -1,24 +1,24 @@
-<!-- 移动端首页 -->
+<!-- 我的菜单 -->
 <template>
-<div id='h5_Index'>
-    <menus/>
+<div class='me_men'>
+    <van-grid :gutter="3" :column-num="3">
+        <van-grid-item v-for="item in mydata" :key="item.id" :icon="item.icon" :to="item.to" :text="item.text" :badge="item.badge" />
+        </van-grid>
 </div>
 </template>
 
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import menus from "../../components/h5/h5_index/h5_men.vue";
+
 export default {
-  name: 'h5_Index',
+  name: 'me_men',
 //import引入的组件需要注入到对象中才能使用
-components: {
-  menus
-},
+components: {},
 data() {
 //这里存放数据
 return {
-
+    mydata:''
 };
 },
 //监听属性 类似于data概念
@@ -31,6 +31,12 @@ methods: {
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
+  let per = sessionStorage.getItem('per');
+   if(per == 'admin'){
+     this.mydata = require('../../../start/json/h5_admin.json');
+   }else{
+      this.mydata = require('../../../start/json/h5user.json');
+   }
 
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
@@ -47,5 +53,7 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
 <style  scoped>
-
+.me_men{
+  padding: 0px 10px 0px 10px;
+}
 </style>

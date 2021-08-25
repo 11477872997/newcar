@@ -109,6 +109,44 @@ const router = new Router({
                 title: '首页',
                 roles: ['admin', 'user', 'SJ']
             },
+            children: [
+                {   //h5首页图表
+                    path: '/h5_home',
+                    name: "h5_home",
+                    component: () => import('../views/h5/h5_home'),
+                    meta: {
+                        title: '首页',
+                        roles: ['admin', 'user', 'SJ']
+                    },
+                },
+                {   //我的
+                    path: '/h5_me',
+                    name: "h5_me",
+                    component: () => import('../views/h5/h5_me'),
+                    meta: {
+                        title: '我的',
+                        roles: ['admin', 'user', 'SJ']
+                    },
+                }
+            ]
+        },
+        {   //h5一键约车
+            path: '/h5_pactcar',
+            name: "h5_pactcar",
+            component: () => import('../views/h5/h5_pactcar'),
+            meta: {
+                title: '约车',
+                roles: ['admin', 'user', 'SJ']
+            },
+        },
+        {   //h5车辆录入
+            path: '/h5_carlr',
+            name: "h5_carlr",
+            component: () => import('../views/h5/h5_carlr'),
+            meta: {
+                title: '车辆录入',
+                roles: ['admin']
+            },
         },
     ]
 })

@@ -1,20 +1,27 @@
-<!-- 移动端首页 -->
+<!-- 公共标题 -->
 <template>
-<div id='h5_Index'>
-    <menus/>
+<div class='h5_tb'>
+  <van-nav-bar
+   v-if="Text.num == 0"
+  :title=Text.Titletext
+/>
+<van-nav-bar  v-if="Text.num == 1" :title="Text.Titletext" left-text="返回" left-arrow @click-left="onClickLeft" />
 </div>
 </template>
 
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import menus from "../../components/h5/h5_index/h5_men.vue";
+
 export default {
-  name: 'h5_Index',
-//import引入的组件需要注入到对象中才能使用
-components: {
-  menus
-},
+
+  name: 'h5_tb',
+  props: {
+    Text: {
+      type: Object,
+       default: function () { return {}}
+    },
+  },
 data() {
 //这里存放数据
 return {
@@ -27,7 +34,9 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
-
+  onClickLeft() {
+      this.$router.go(-1);
+    },
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {

@@ -1,30 +1,44 @@
-<!-- 移动端首页 -->
+<!-- h5菜单 -->
 <template>
-<div id='h5_Index'>
-    <menus/>
+<div class='h5_men'>
+    <van-tabbar route v-model="active">
+        <van-tabbar-item replace v-for="item in mydata" :key="item.id" :icon="item.icon" :to="item.to" :name="item.name">
+       {{item.text}}</van-tabbar-item>
+        </van-tabbar>
+     <!-- 子路由出口 -->
+    <router-view />
 </div>
 </template>
 
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import menus from "../../components/h5/h5_index/h5_men.vue";
+
 export default {
-  name: 'h5_Index',
+  name: 'h5_men',
 //import引入的组件需要注入到对象中才能使用
-components: {
-  menus
-},
+components: {},
 data() {
 //这里存放数据
 return {
-
+    active:"",//高亮选中
+    mydata:require('../../../start/json/h5.men.json')
 };
 },
 //监听属性 类似于data概念
 computed: {},
 //监控data中的数据变化
-watch: {},
+watch: {
+       //实时监听路由状态
+    "$route.path": {
+      handler(val) {
+        //刷新页面定位当前高亮
+        // console.log(val)
+        this.active = val;
+      },
+      immediate: true, //立即执行
+    },
+},
 //方法集合
 methods: {
 

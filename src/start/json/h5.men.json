@@ -1,0 +1,17 @@
+[
+    {
+        "id": "0",
+        "name": "/h5_home",
+        "to": "/h5_home",
+        "icon": "home-o",
+        "text": "首页"
+      },
+     {
+        "id": "1",
+        "name": "/h5_me",
+        "to": "/h5_me",
+        "icon": "friends-o",
+        "text": "我的"
+      }
+      
+]

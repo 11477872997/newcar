@@ -1,0 +1,25 @@
+[
+    {
+        "id": "0",
+        "text": "一键约车",
+        "badge":"",
+        "icon":"cluster-o",
+        "to":"/h5_pactcar"
+    },
+    {
+        "id": "1",
+        "text": "未派车",
+        "badge":"1",
+        "icon":"records",
+        "to":""
+    },
+    {
+        "id": "2",
+        "text": "已派车",
+        "badge":"1",
+        "icon":"description",
+        "to":""
+    }
+
+    
+]
