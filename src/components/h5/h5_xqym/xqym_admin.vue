@@ -55,23 +55,6 @@
                 placeholder="人数"
                 name="ycrs"
               />
-              <!-- <van-field
-                v-model="item.cfd"
-                clearable
-                label="出发地"
-                name="cfd"
-                left-icon="location-o"
-                placeholder="出发地"
-              />
-              <van-field
-                v-model="item.mdd"
-                clearable
-                label="目的地"
-                name="mdd"
-                left-icon="location-o"
-                placeholder="目的地"
-              /> -->
-
                <van-field
               v-model="item.cfd"
               clearable
@@ -156,6 +139,7 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
+import { Notify } from "vant";
 import {api_idFindAll,getCPHAndSJXM,api_pcdUpdate} from '../../../start/api/index.js'
 export default {
   name: 'xqym_admin',
