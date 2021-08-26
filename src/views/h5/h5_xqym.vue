@@ -3,6 +3,7 @@
 <div class='h5_xqym'>
   <Tb :Text="{...propsText}"></Tb>
   <qxymUser  v-if="this.$route.query.qx == 'user'" />
+  <qxymDmin  v-if="this.$route.query.qx == 'admin'" />
 </div>
 </template>
 
@@ -11,12 +12,14 @@
 //例如：import 《组件名称》 from '《组件路径》';
 import Tb from '../../components/h5/h5_tb.vue'
 import qxymUser from '../../components/h5/h5_xqym/xqym_user.vue'
+import qxymDmin from '../../components/h5/h5_xqym/xqym_admin.vue'
 export default {
   name: 'h5_xqym',
 //import引入的组件需要注入到对象中才能使用
 components: {
   Tb,
-  qxymUser
+  qxymUser,
+  qxymDmin
 },
 data() {
 //这里存放数据
@@ -37,11 +40,10 @@ methods: {
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-  console.log(this.$route.query)
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
-
+  
 },
 beforeCreate() {}, //生命周期 - 创建之前
 beforeMount() {}, //生命周期 - 挂载之前
@@ -51,6 +53,7 @@ beforeDestroy() {}, //生命周期 - 销毁之前
 destroyed() {}, //生命周期 - 销毁完成
 activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 }
+
 </script>
 <style  scoped>
 
