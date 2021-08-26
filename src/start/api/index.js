@@ -111,6 +111,17 @@ function api_pccxsyFindAll(data) {
         store.state.tableData = res.data //车辆管理查询表格数据
     });
 }
+
+function getCPHAndSJXM(data) {
+    const url = 'sj/getCPHAndSJXM';
+    return request({
+        url: url,
+        method: 'post',
+        data
+    })
+}
+
+
 /**
  * 查询当前车辆
  * cph :车牌号
@@ -169,6 +180,13 @@ function api_dpdFindAll() {
     }).then((res) => {
         store.state.DidtableData = res.data // 待派订单列表数据
     });
+}
+function dpdFindAll() {
+    const url = 'yc/dpdFindAll';
+    return request({
+        url: url,
+        method: 'post'
+    })
 }
 /**
  * 
@@ -229,9 +247,29 @@ function api_ypdFindAll() {
         method: 'post'
     }).then((res) => {
         store.state.haveSenttableData = res.data // 待派订单列表数据
+       
     });
 }
-
+function ypdFindAll() {
+    const url = 'yc/ypdFindAll';
+    return request({
+        url: url,
+        method: 'post'
+    })
+}
+/**
+ * ycrxm :用户名
+ * zt 状态 3 未派 4已派
+ * 当前用户查看的已派和待派
+ */
+function api_ycrxmFindAll(data) { 
+    const url = 'yc/ycrxmFindAll';
+    return request({
+        url: url,
+        method: 'post',
+        data
+    })
+}
 export {
     api_login,
     api_count,
@@ -247,5 +285,9 @@ export {
     api_idFindAll,
     api_pcdUpdate,
     api_getSJNum,
-    api_ypdFindAll
+    api_ypdFindAll,
+    getCPHAndSJXM,
+    dpdFindAll,
+    ypdFindAll,
+    api_ycrxmFindAll
 }

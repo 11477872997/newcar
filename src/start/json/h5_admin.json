@@ -9,16 +9,16 @@
     {
         "id": "1",
         "text": "未派车",
-        "badge":"1",
+        "badge":"",
         "icon":"records",
-        "to":""
+        "to":"/h5_wp"
     },
     {
         "id": "2",
         "text": "已派车",
-        "badge":"1",
+        "badge":"",
         "icon":"description",
-        "to":""
+        "to":"/h5_yp"
     },
     {
         "id": "3",

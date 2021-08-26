@@ -34,9 +34,10 @@ const store = new Vuex.Store({
     },
     plugins: [createPersistedState({
         storage: window.sessionStorage
-        
+
     })],
 })
+
 
 export default store
 

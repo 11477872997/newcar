@@ -1,7 +1,7 @@
 <!-- 车辆管理列表 -->
 <template>
 <div class='setcat_car'>
-        <van-row type="flex" class="SU">
+    <van-row type="flex" class="SU">
       <van-col span="24">
         <van-search v-model="value" show-action placeholder="请输入时间、地点、人员等信息" @search="onSearch">
           <template #action>
@@ -53,7 +53,7 @@
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 import { Notify } from "vant";
-// import { api_pccxsyFindAll } from "../../../start/api/index.js";
+import { getCPHAndSJXM,api_deletes } from "../../../start/api/index.js";
 export default {
   name: 'setcat_car',
 //import引入的组件需要注入到对象中才能使用
@@ -76,11 +76,11 @@ watch: {},
 //方法集合
 methods: {
   xqyem(cph) {
-      this.$router.push({ path: "/CLXQYE", query: { id: cph } }); ///跳转详细页面
+      this.$router.push({ path: "/h5_clxqye", query: { id: cph } }); ///跳转详细页面
     },
     SCDD(cph) {
       //删除订单
-      deletes({cph: cph })
+      api_deletes({cph: cph })
         .then((res) => {
           if (res.code == 200) {
            Notify({ type: 'success', message: '删除成功' });
@@ -108,7 +108,9 @@ methods: {
       });
     },
     goapi() {
- 
+      getCPHAndSJXM({}).then((res)=>{
+        this.clzt = res.data;
+      });
     },
 },
 //生命周期 - 创建完成（可以访问当前this实例）
@@ -128,7 +130,10 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
 <style  scoped>
-.SU {
+.bg-car{
+  margin: 15px 0px;
+}
+.SU{
   position: fixed;
   width: 100%;
   z-index: 999;

@@ -157,6 +157,33 @@ const router = new Router({
                 roles: ['admin']
             },
         },
+        {   //h5车辆管理修改订单
+            path: '/h5_clxqye',
+            name: "h5_clxqye",
+            component: () => import('../views/h5/h5_clxqye'),
+            meta: {
+                title: '车辆管理',
+                roles: ['admin']
+            },
+        },
+        {   //h5未派订单
+            path: '/h5_wp',
+            name: "h5_wp",
+            component: () => import('../views/h5/h5_wp'),
+            meta: {
+                title: '未派订单',
+                roles: ['admin', 'user', 'SJ']
+            },
+        },
+        {   //h5以派订单
+            path: '/h5_yp',
+            name: "h5_yp",
+            component: () => import('../views/h5/h5_yp'),
+            meta: {
+                title: '已派订单',
+                roles: ['admin', 'user', 'SJ']
+            },
+        },
     ]
 })
 
