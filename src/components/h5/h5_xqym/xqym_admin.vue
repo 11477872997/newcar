@@ -258,7 +258,7 @@ methods: {
       });
     },
     onSubmit(values) {
-        console.log(values)
+        // console.log(values)
         if(values.cph == '' || values.sj == ''){
              Notify({ type: "danger", message: "司机和车牌号不能为空" });
             return false;

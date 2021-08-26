@@ -10,6 +10,7 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
+import {count,api_ycrxmFindAll} from '../../../start/api/index.js'
 export default {
   name: 'me_men',
 //import引入的组件需要注入到对象中才能使用
@@ -33,12 +34,47 @@ created() {
   let per = sessionStorage.getItem('per');
    if(per == 'admin'){
      this.mydata = require('../../../start/json/h5_admin.json');
-    //  for(let i = 0;i<this.mydata.length;i++){
-    //           if(this.mydata.text ==)
-    //  }
-     
-   }else{
+     count({}).then((res)=>{
+        let wp = res.data[0].wp;
+        let yp = res.data[0].yp;
+        for(let i = 0 ;i<this.mydata.length;i++){
+          if( this.mydata[i].text  == '未派车'){
+              this.mydata[i].badge = wp
+          };
+          if( this.mydata[i].text  == '已派车'){
+              this.mydata[i].badge = yp
+          };
+          
+        }
+       
+     })
+     return false;  
+   }
+   if(per == 'user'){
+     let ycrxm = this.$store.state.username; //约车人
       this.mydata = require('../../../start/json/h5user.json');
+    api_ycrxmFindAll({ycrxm: ycrxm, zt: "3" }).then((res)=>{
+          let wp = res.data.length;
+          if(res.data.length != 0){
+              for(let i = 0 ;i<this.mydata.length;i++){
+                      if( this.mydata[i].text  == '未派车'){
+                          this.mydata[i].badge = wp
+                      };
+              }
+          }   
+     })
+    api_ycrxmFindAll({ycrxm: ycrxm, zt: "4" }).then((res)=>{
+          let yp = res.data.length;
+          if(res.data.length != 0){
+              for(let i = 0 ;i<this.mydata.length;i++){
+                      if( this.mydata[i].text  == '已派车'){
+                          this.mydata[i].badge = yp
+                      };
+              }
+          }   
+     })
+      return false; 
+
    }
 
 },

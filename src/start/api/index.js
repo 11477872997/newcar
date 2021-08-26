@@ -35,6 +35,13 @@ function api_count() {
           
       })
 }
+function count() {   
+    const url = 'gl/getYCNum';
+    return request({
+        url: url,
+        method: 'post'
+    })
+}
 
 /**
  * 约车订单
@@ -289,5 +296,6 @@ export {
     getCPHAndSJXM,
     dpdFindAll,
     ypdFindAll,
-    api_ycrxmFindAll
+    api_ycrxmFindAll,
+    count
 }
