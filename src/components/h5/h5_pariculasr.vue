@@ -83,14 +83,10 @@ export default {
   },
   //方法集合
   methods: {
-    onClickLeft() {
-      //返回
-      this.$router.go(-1);
-    },
     xqyem(id) {
-    //   let per = this.$store.state.per
-    //   let zt = this.$route.query.zt;
-    //   this.$router.push({ path: "/xqym", query: { id: id ,per:per,zt:zt} }); ///跳转详细页面
+      let qx = this.objname.qx 
+      let zt = this.objname.zt;
+      this.$router.push({ path: "/h5_xqym", query: { id: id ,qx:qx,zt:zt} }); ///跳转详细页面
     },
     qxdd(id) {
       //取消订单
@@ -139,8 +135,6 @@ export default {
       });
     },
     mydaeFN() {
-      //动态渲染不同的数据
-      console.log(this.objname)
     //   管理员
     // 未派订单列表数据
     if(this.objname.zt == 3 && this.objname.name == 'wp' && this.objname.qx == 'admin'){

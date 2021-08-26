@@ -175,12 +175,21 @@ const router = new Router({
                 roles: ['admin', 'user', 'SJ']
             },
         },
-        {   //h5以派订单
+        {   //h5已派订单
             path: '/h5_yp',
             name: "h5_yp",
             component: () => import('../views/h5/h5_yp'),
             meta: {
                 title: '已派订单',
+                roles: ['admin', 'user', 'SJ']
+            },
+        },
+        {   // 公共详情
+            path: '/h5_xqym',
+            name: "h5_xqym",
+            component: () => import('../views/h5/h5_xqym'),
+            meta: {
+                title: '详情页面',
                 roles: ['admin', 'user', 'SJ']
             },
         },

@@ -1,22 +1,30 @@
-<!-- 未派车列表 -->
+<!-- h5公共 详情-->
 <template>
-<div class='wp_table'>
-    
+<div class='h5_xqym'>
+  <Tb :Text="{...propsText}"></Tb>
+  <qxymUser  v-if="this.$route.query.qx == 'user'" />
 </div>
 </template>
 
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-
+import Tb from '../../components/h5/h5_tb.vue'
+import qxymUser from '../../components/h5/h5_xqym/xqym_user.vue'
 export default {
-  name: 'wp_table',
+  name: 'h5_xqym',
 //import引入的组件需要注入到对象中才能使用
-components: {},
+components: {
+  Tb,
+  qxymUser
+},
 data() {
 //这里存放数据
 return {
-
+propsText: {
+        num: 1,
+        Titletext: "订单详情",
+    }
 };
 },
 //监听属性 类似于data概念
@@ -29,7 +37,7 @@ methods: {
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-
+  console.log(this.$route.query)
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
