@@ -77,7 +77,7 @@ methods: {
         });
       },
       Logging(){
-        if(this.num != this.fromdata.yzm){
+        if(this.num.toLowerCase() != this.fromdata.yzm.toLowerCase()){
             this.$message.error('验证码错误');
           return false;
         }
@@ -95,7 +95,7 @@ methods: {
                  }else if(res.data.status == 0){
                     this.$message.error(res.data.msg);
                  } else if(res.data.status == 1){
-                      sessionStorage.setItem("per", res.data.per);  //权限
+                      sessionStorage.setItem("per", res.data.userType);  //权限
                       // sessionStorage.setItem("username", res.data.username);  //用户名
                         this.$store.commit("setUsername", res.data.username) //用户名
                       if (this.isMobile()) {

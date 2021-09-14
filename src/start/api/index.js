@@ -14,6 +14,16 @@ function api_login(data) {
         data
     })
 }
+
+function api_getUser(data) {  
+    const url = '/getUser';
+    return request({
+        url: url,
+        method: 'post',
+        data
+    })
+}
+
 /**
  *  //pc首页 已派车和未派车的提示数量
  * @returns 
@@ -297,5 +307,6 @@ export {
     dpdFindAll,
     ypdFindAll,
     api_ycrxmFindAll,
-    count
+    count,
+    api_getUser
 }
