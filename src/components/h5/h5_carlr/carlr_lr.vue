@@ -2,7 +2,7 @@
 <template>
 <div class='carlr_lr'>
     <van-form @submit="onSubmit">
-      <van-row class="BOXshadow mT bg boxPD" type="flex">
+      <van-row class="BOXshadow mT bg " type="flex">
         <van-col span="24" style="height:5px"></van-col>
         <van-col span="24">
           <van-field

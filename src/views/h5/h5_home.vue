@@ -51,14 +51,14 @@ methods: {
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
   let  query=this.$route.query;  //获取地址栏参数
-  if(query.id != null){
     api_getUser({
         id:query.id
       }).then( (res)=>{
         // console.log(res.data)
         sessionStorage.setItem('per',res.data.per);
+       this.$store.commit("setUsername", res.data.username) //用户名
       })
-  }
+
  
   api_getSJNum({}).then((res) => {
       if (res.code == 200) {

@@ -16,7 +16,7 @@ function api_login(data) {
 }
 
 function api_getUser(data) {  
-    const url = '/getUser';
+    const url = 'getUser';
     return request({
         url: url,
         method: 'post',

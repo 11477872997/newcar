@@ -59,5 +59,11 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
 <style  scoped>
+.h5_tb{
+position: fixed;
+    width: 100%;
+    z-index: 999;
+    top: 0px;
+}
 
 </style>
