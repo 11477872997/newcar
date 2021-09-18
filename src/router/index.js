@@ -163,7 +163,7 @@ const router = new Router({
             component: () => import('../views/h5/h5_clxqye'),
             meta: {
                 title: '车辆管理',
-                roles: ['admin']
+                roles: ['admin', 'SJ']
             },
         },
         {   //h5未派订单

@@ -18,7 +18,7 @@ components: {},
 data() {
 //这里存放数据
 return {
-    mydata:''
+    mydata:'',
 };
 },
 //监听属性 类似于data概念
@@ -48,6 +48,13 @@ created() {
         }
        
      })
+     return false;  
+   }
+   if(per == 'SJ'){
+     this.mydata = require('../../../start/json/h5_dirver.json');
+    for(let i = 0 ;i<this.mydata.length;i++){
+           this.mydata[i].to = '/h5_clxqye'
+           }
      return false;  
    }
    if(per == 'user'){

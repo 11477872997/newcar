@@ -1,8 +1,9 @@
 <!-- h5 首页 -->
 <template>
-<div class='h5_home'>
+<div class='h5_home' >
     <Tb :Text="{...propsText}"></Tb>
-    <van-row type="flex" class="bg">
+    <img  :src=login_img  v-if="zttpye == 'SJ'" />
+    <van-row type="flex" class="bg" v-if="zttpye !== 'SJ'">
       <van-col span="24">
         <van-notice-bar left-icon="volume-o" :scrollable="false">
           <van-swipe vertical class="notice-swipe" :autoplay="3000" :show-indicators="false">
@@ -11,7 +12,7 @@
         </van-notice-bar>
       </van-col>
     </van-row>
-    <van-row type="flex" class="bg">
+    <van-row type="flex" class="bg" v-if="zttpye !== 'SJ'">
       <van-col span="24">
         <canvas id="boxCanvas" style="width: 100%;height: 300px;"></canvas>
       </van-col>
@@ -37,7 +38,9 @@ return {
         num: 0,
         Titletext: "首页",
     },
-   mydata: []
+   mydata: [],
+   zttpye:"",
+   login_img: require("../../assets/login_bg.jpg"),
 };
 },
 //监听属性 类似于data概念
@@ -51,14 +54,20 @@ methods: {
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
   let  query=this.$route.query;  //获取地址栏参数
+  if(query.id == 'undefined' || query.id === null){
     api_getUser({
-        id:query.id
-      }).then( (res)=>{
-        // console.log(res.data)
-        sessionStorage.setItem('per',res.data.per);
-       this.$store.commit("setUsername", res.data.username) //用户名
-      })
-
+            id:query.id
+          }).then( (res)=>{
+            console.log(res.data)
+            sessionStorage.setItem('per',res.data.per);
+            this.zttpye = sessionStorage.getItem('per');
+          this.$store.commit("setUsername", res.data.username) //用户名
+          })
+    
+  }else{
+    this.zttpye = sessionStorage.getItem('per');
+  }
+   
  
   api_getSJNum({}).then((res) => {
       if (res.code == 200) {

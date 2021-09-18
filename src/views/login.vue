@@ -106,7 +106,7 @@ methods: {
                       }else{
                         //  pc 端触发
                         // per ：类型 
-                         if(res.data.per != 'admin'){
+                         if(res.data.userType != 'admin'){
                              this.$message.error('不是管理员无法登陆PC端');
                              sessionStorage.clear();
                              return  false;

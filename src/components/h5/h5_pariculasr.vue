@@ -193,6 +193,6 @@ export default {
   top: 46px;
 }
 .box-RN {
-  padding-top: 35px;
+  padding-top: 98px;
 }
 </style>

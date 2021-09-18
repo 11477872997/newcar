@@ -140,6 +140,6 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
   top: 46px;
 }
 .box-RN {
-  padding-top: 37px;
+  padding-top: 98px;
 }
 </style>
