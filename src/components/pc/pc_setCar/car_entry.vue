@@ -56,8 +56,8 @@ methods: {
     }, 
     entry(){   //录入
         api_pcinsert({ 
-            cph:this.from.cph, 
-            sj:this.from.sj 
+            cph:this.from.cph.trim(), 
+            sj:this.from.sj.trim() 
             }).then((res) => {
                 if (res.code == 200) {
                 this.$message({

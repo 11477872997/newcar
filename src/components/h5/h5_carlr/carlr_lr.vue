@@ -66,8 +66,8 @@ methods: {
          return false
       }
      api_pcinsert({
-          cph: values.cph,
-          sj: values.sj
+          cph: values.cph.trim(),
+          sj: values.sj.trim()
           }).then((res) => {
         if (res.code == 200) {
           let data = res.data

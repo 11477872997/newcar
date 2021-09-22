@@ -207,6 +207,7 @@ methods: {
         bz: names.bz,
         ry: names.ry,
         ycrxm: ycrxm,
+        userid: sessionStorage.getItem('userid'),
       }).then((res) => {
         if (res.code == 200) {
            Notify({ type: "success", message: "提交成功"});

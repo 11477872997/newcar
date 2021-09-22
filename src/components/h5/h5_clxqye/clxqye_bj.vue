@@ -1,13 +1,13 @@
 <!-- h5车辆修改 -->
 <template>
 <div class='clxqye_bj'>
-    <div class="bg " v-for="item in mydate" :key="item.zt">
+    <div class="bg " >
       <van-form @submit="onSubmit">
         <van-row class="BOXshadow mT bg" type="flex">
           <van-col span="24" style="height:5px"></van-col>
           <van-col span="24">
             <van-field
-              v-model="item.zt"
+              v-model="mydate.zt"
               readonly
               clickable
               name="zt"
@@ -26,7 +26,7 @@
             </van-popup>
 
             <van-field
-              v-model="item.cph"
+              v-model="mydate.cph"
               clearable
               label="车牌号"
               name="cph"
@@ -35,7 +35,7 @@
               
             />
             <van-field
-              v-model="item.sj"
+              v-model="mydate.sj"
               clearable
               label="司机"
               name="sj"
@@ -94,16 +94,22 @@ methods: {
     },
     onConfirm3(value) {
       //司机
-     this.mydate[0].zt = value;
+     this.mydate.zt = value;
      this.showPicker3 = false;
     },
     mydaeFN() {
       //查询当前车辆
-      let cph = this.$route.query.id;
-     api_selectdqcl({cph: cph }).then((res) => {
-      //  console.log(res)
+      let id = this.$route.query.id;
+     api_selectdqcl({id: id }).then((res) => {
           if (res.code == 200) {
-            this.mydate = res.data;
+            if(res.data.result.zt == '5'){
+                res.data.result.zt = '在勤'
+              }else if(res.data.result.zt == '6'){
+                 res.data.result.zt = '待命'
+              }else if(res.data.result.zt == '7'){
+                  res.data.result.zt = '待勤'
+              }
+            this.mydate = res.data.result;
           }
         });
     },
@@ -117,13 +123,15 @@ methods: {
       }else if(values.zt == '待勤'){
           zt = '7'
       }
-      let sj = values.sj;
-      let cph = values.cph;
+      let sj = values.sj.trim();
+      let cph = values.cph.trim();
+      let id =  this.mydate.id;
       //选染
       api_clxxUpdate({
           zt: zt,
           sj: sj,
-          cph: cph
+          cph: cph,
+          id: id
       }).then((res) => {
           if (res.code == 200) {
             Notify({ type: 'success', message: '修改成功' });

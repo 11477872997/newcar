@@ -96,6 +96,7 @@ methods: {
                     this.$message.error(res.data.msg);
                  } else if(res.data.status == 1){
                       sessionStorage.setItem("per", res.data.userType);  //权限
+                      sessionStorage.setItem("userid", res.data.userid);  //权限
                       // sessionStorage.setItem("username", res.data.username);  //用户名
                         this.$store.commit("setUsername", res.data.username) //用户名
                       if (this.isMobile()) {

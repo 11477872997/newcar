@@ -103,7 +103,7 @@ function api_getCarMsg(data) {
 }
 /**
  *  删除当前车辆
- * cph ：车牌号
+ * id :id
  */
 
 function api_deletes(data) {
@@ -119,7 +119,7 @@ function api_deletes(data) {
  */
 
 function api_pccxsyFindAll(data) {
-    const url = 'sj/getCPHAndSJXM';
+    const url = 'sj/getAllPC';
     return request({
         url: url,
         method: 'post',
@@ -130,7 +130,7 @@ function api_pccxsyFindAll(data) {
 }
 
 function getCPHAndSJXM(data) {
-    const url = 'sj/getCPHAndSJXM';
+    const url = 'sj/getAllPC';
     return request({
         url: url,
         method: 'post',
@@ -141,17 +141,19 @@ function getCPHAndSJXM(data) {
 
 /**
  * 查询当前车辆
- * cph :车牌号
+ * id :id
  */
 // 
 function api_selectdqcl(data) {
-    const url = 'pc/selectdqcl';
+    const url = 'sj/getSJById';
     return request({
         url: url,
         method: 'post',
         data
     })
 }
+
+
 /**
  *   修改当前车辆
  * cph ：车牌号

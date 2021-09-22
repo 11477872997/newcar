@@ -120,6 +120,7 @@ methods: {
         bz: this.from.bz,
         ry: this.from.ry,
         ycrxm: ycrxm,
+        userid: sessionStorage.getItem('userid'),
       }).then((res) => {
         // console.log(res)
         if (res.code == 200) {

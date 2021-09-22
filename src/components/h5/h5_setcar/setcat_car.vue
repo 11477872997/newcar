@@ -21,7 +21,7 @@
             :thumb="picUrlOff"
           >
             <template #footer>
-              <van-button size="normal"  type="info"  @click="xqyem(item.cph)">修改状态</van-button>
+              <van-button size="normal"  type="info"  @click="xqyem(item.id)">修改状态</van-button>
               <van-button size="normal"  type="info" @click="SCDD(item.cph)">删除</van-button>
             </template>
           </van-card>
@@ -39,7 +39,7 @@
             :thumb="picUrlOff"
           >
             <template #footer>
-              <van-button size="normal"  type="info" @click="xqyem(item.cph)">修改状态</van-button>
+              <van-button size="normal"  type="info" @click="xqyem(item.id)">修改状态</van-button>
               <van-button size="normal"  type="info" @click="SCDD(item.cph)">删除</van-button>
             </template>
           </van-card>
@@ -75,12 +75,12 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
-  xqyem(cph) {
-      this.$router.push({ path: "/h5_clxqye", query: { id: cph } }); ///跳转详细页面
+  xqyem(id) {
+      this.$router.push({ path: "/h5_clxqye", query: { id: id } }); ///跳转详细页面
     },
-    SCDD(cph) {
+    SCDD(id) {
       //删除订单
-      api_deletes({cph: cph })
+      api_deletes({cph: id })
         .then((res) => {
           if (res.code == 200) {
            Notify({ type: 'success', message: '删除成功' });

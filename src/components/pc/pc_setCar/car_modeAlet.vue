@@ -72,9 +72,9 @@ watch: {},
 //方法集合
 methods: {
   parentHandleclick(row){   //编辑当前车辆
-       api_selectdqcl({ cph: row.cph }).then((res) => {
+       api_selectdqcl({ id: row.id }).then((res) => {
         if (res.code == 200) {
-          this.iddate = res.data[0];
+          this.iddate = res.data.result;
         }
       });
       this.centerDialogVisible = true;
@@ -85,20 +85,21 @@ methods: {
   conserve(id){  //保存
     //保存
       api_clxxUpdate({
-        cph: this.iddate.cph,
-        sj: this.iddate.sj,
-        zt: this.iddate.zt,
+        cph: this.iddate.cph.trim(),
+        sj: this.iddate.sj.trim(),
+        id: this.iddate.id,
+        zt: this.iddate.zt.trim(),
       }).then((res) => {
         if (res.code == 200) {
            this.$message({
-                    message: '删除成功',
+                    message: '保存成功',
                     type: 'success'
         });
           this.cancel();
           api_pccxsyFindAll({});
         }
     }).catch((error)=>{
-       this.$message.error("删除失败");
+       this.$message.error("保存失败");
     })
   }
 },
