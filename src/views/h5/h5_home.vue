@@ -53,8 +53,9 @@ methods: {
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-  let  query=this.$route.query;  //获取地址栏参数
-  if(query.id == 'undefined' || query.id === null){
+  let  query = this.$route.query;  //获取地址栏参数
+  if(query.id != 'undefined'){
+    // console.log(query)
     api_getUser({
             id:query.id
           }).then( (res)=>{
