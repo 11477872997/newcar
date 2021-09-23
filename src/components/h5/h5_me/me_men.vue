@@ -63,23 +63,19 @@ created() {
       this.mydata = require('../../../start/json/h5user.json');
     api_ycrxmFindAll({ycrxm: ycrxm, zt: "3" }).then((res)=>{
           let wp = res.data.length;
-          if(res.data.length != 0){
               for(let i = 0 ;i<this.mydata.length;i++){
                       if( this.mydata[i].text  == '未派车'){
                           this.mydata[i].badge = wp
                       };
               }
-          }   
      })
     api_ycrxmFindAll({ycrxm: ycrxm, zt: "4" }).then((res)=>{
           let yp = res.data.length;
-          if(res.data.length != 0){
               for(let i = 0 ;i<this.mydata.length;i++){
                       if( this.mydata[i].text  == '已派车'){
                           this.mydata[i].badge = yp
                       };
               }
-          }   
      })
       return false; 
 
