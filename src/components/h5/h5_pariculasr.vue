@@ -25,7 +25,7 @@
             </template>
             <template #footer>
               <van-button size="normal"  type="info"  @click="xqyem(item.id)">详情</van-button>
-              <!-- <van-button  size="normal"  type="info"  @click="qxdd(item.id)">取消订单</van-button> -->
+              <van-button  size="normal"  type="info"  @click="qxdd(item.id)">取消订单</van-button>
             </template>
           </van-card>
         </van-col>
@@ -46,7 +46,7 @@
             </template>
             <template #footer>
               <van-button size="normal"  type="info" @click="xqyem(item.id)">详情</van-button>
-              <!-- <van-button size="normal"  type="info" @click="qxdd(item.id)"  v-if="un.indexOf(flag) == -1 ? false :true ">取消订单</van-button> -->
+              <van-button size="normal"  type="info" @click="qxdd(item.id)" >取消订单</van-button>
             </template>
           </van-card>
         </van-col>
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import {dpdFindAll,api_ycrxmFindAll,ypdFindAll} from '../../start/api/index.js'
+import {dpdFindAll,api_ycrxmFindAll,ypdFindAll,api_ycztUpdate} from '../../start/api/index.js'
 import { Dialog,Notify } from 'vant';
 export default {
     props: {
@@ -93,19 +93,18 @@ export default {
       Dialog.confirm({
         title: "订单信息",
         message: "您确定呀取消订单吗？",
-      })
-        .then(() => {
+      }) .then(() => {
           // on confirm
-          updateZT({
+          api_ycztUpdate({
             zt:'2',
             ycid:id
           }).then((res)=>{
-            if(res.data.status == 1){
+            console.log(res)
+            if(res.data == true){
               Notify({ type: 'success', message: '取消成功' });
-              this.mydaeFN();
-            }else if(res.data.status == 0){
+              this.$router.go(-1);
+            }else if(res.data == false){
                Notify({ type: 'danger', message: '取消失败' });
-               this.mydaeFN();
             }
             
           })

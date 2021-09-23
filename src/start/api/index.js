@@ -34,13 +34,9 @@ function api_count() {
         url: url,
         method: 'post'
     }).then((res) =>{
-        let data = res.data[0];
-        if(data.wp != 0){
+          let data = res.data[0];
           store.state.Did_not_send =  data.wp;   //未派
-        };
-        if(data.yp != 0){
            store.state.Have_sent =  data.yp ;  //已派
-        };
           
           
       })
@@ -161,7 +157,7 @@ function api_selectdqcl(data) {
  * zt ：状态   6待命  5在勤  7待勤
  */
 function api_clxxUpdate(data) {
-    const url = 'pc/clxxUpdate';
+    const url = 'sj/updateSJ';
     return request({
         url: url,
         method: 'post',
@@ -289,6 +285,19 @@ function api_ycrxmFindAll(data) {
         data
     })
 }
+/**
+ *   取消订单
+ * zt 状态 2 
+ * ycid 订单id
+ */
+function api_ycztUpdate(data) { 
+    const url = 'yc/ycztUpdate';
+    return request({
+        url: url,
+        method: 'post',
+        data
+    })
+}
 export {
     api_login,
     api_count,
@@ -310,5 +319,6 @@ export {
     ypdFindAll,
     api_ycrxmFindAll,
     count,
-    api_getUser
+    api_getUser,
+    api_ycztUpdate
 }

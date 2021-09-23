@@ -53,7 +53,8 @@ created() {
    if(per == 'SJ'){
      this.mydata = require('../../../start/json/h5_dirver.json');
     for(let i = 0 ;i<this.mydata.length;i++){
-           this.mydata[i].to = '/h5_clxqye'
+          //  this.mydata[i].to = '/h5_clxqye?id=10000'
+           this.mydata[i].to = '/h5_clxqye?id='+sessionStorage.getItem('userid')
            }
      return false;  
    }
