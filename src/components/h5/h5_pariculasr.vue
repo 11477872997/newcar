@@ -86,7 +86,7 @@ export default {
     xqyem(id) {
       let qx = this.objname.qx 
       let zt = this.objname.zt;
-      this.$router.push({ path: "/h5_xqym", query: { id: id ,qx:qx,zt:zt} }); ///跳转详细页面
+      this.$router.push({ path: "/h5_xqym", query: { id:id ,qx:qx,zt:zt} }); ///跳转详细页面
     },
     qxdd(id) {
       //取消订单

@@ -191,6 +191,8 @@ cancel(){  //取消
         ry: this.iddate.ry,
         cph: this.iddate.cph,
         sj: this.iddate.sj,
+        ycrxm: this.iddate.ycrxm,
+        userid:this.iddate.ycruserid,
       }).then((res) => {
         if (res.code == 200) {
         this.$message({

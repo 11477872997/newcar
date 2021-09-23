@@ -214,6 +214,7 @@ methods: {
          this.$message.error("请选择司机");
            return false
       }
+      // console.log(this.iddate)
     api_pcdUpdate({
         id: id,
         ycsj: this.iddate.ycsj,
@@ -225,6 +226,8 @@ methods: {
         ry: this.iddate.ry,
         cph: this.optionsCPH,
         sj: this.iddate.sj,
+        ycrxm: this.iddate.ycrxm,
+        userid: this.iddate.ycruserid,
       }).then((res) => {
         if (res.code == 200) {
         this.$message({

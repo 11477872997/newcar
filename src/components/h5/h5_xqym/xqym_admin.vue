@@ -196,6 +196,7 @@ methods: {
       api_idFindAll({
         id: this.$parent.$route.query.id,
       }).then((res) => {
+        console.log(res)
         if (res.code == 200) {
           this.mydate = res.data;
            if( this.$parent.$route.query.zt != 3){
@@ -264,6 +265,7 @@ methods: {
             return false;
         }
       //发送
+      console.log(this.mydate)
       //修改订单
       api_pcdUpdate({
         id: values.id,
@@ -275,6 +277,8 @@ methods: {
         bz: values.bz,
         ry: values.ry,
         cph: values.cph,
+        ycrxm: this.mydate.ycrxm,
+        userid: this.mydate.ycruserid,
         sj: values.sj.substring(0,3),
       }).then((res) => {
         if (res.code == 200) {
