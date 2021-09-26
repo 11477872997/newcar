@@ -32,6 +32,10 @@
                 <th>车牌号 ：</th>
                 <th>{{row.cph}}</th>
                 </tr>
+                 <tr >
+                <th>是否等待:</th>
+                <th>{{row.sfdd}}</th>
+                </tr>
                 <tr>
                 <th >备注:</th>
                 <th colspan="3">{{row.bz}}</th>

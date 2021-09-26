@@ -1,9 +1,13 @@
 <!-- 待派车弹框 -->
 <template>
 <div class='did_not_modeAlet'>
- <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center >
+ <el-dialog title="提示" :visible.sync="centerDialogVisible" width="35%" center >
       <el-row class="mT">
         <el-col :span="24">
+          <el-col :span="7" class="el-seleect-letf">
+           请选择时间
+         </el-col>
+          <el-col :span="17">
           <el-date-picker
             :style="{width:'100%'}"
             v-model="iddate.ycsj"
@@ -12,12 +16,32 @@
             value-format="yyyy-MM-DD HH:mm"
             placeholder="选择日期时间"
           ></el-date-picker>
+           </el-col>
         </el-col>
       </el-row>
+
       <el-row class="mT">
         <el-col :span="24">
           <el-col :span="7" class="el-seleect-letf">
-           请选择/输入出发地
+           是否等待
+         </el-col>
+         <el-col :span="17">
+            <el-select v-model="iddate.sfdd" placeholder="请选择/是否等待"  :style="{width:'100%'}"  >
+                <el-option
+                v-for="item in sfdd"
+                :key="item.value"
+                :value="item.value">
+                </el-option>
+            </el-select>
+              </el-col>
+        </el-col>
+      </el-row>
+
+      
+      <el-row class="mT">
+        <el-col :span="24">
+          <el-col :span="7" class="el-seleect-letf">
+          请选择/输入出发地 
          </el-col>
          <el-col :span="17">
            <el-select v-model="iddate.cfd" placeholder="请选择/输入出发地" filterable @blur="selectBlurcfd" :style="{width:'100%'}">
@@ -157,6 +181,10 @@ return {
     pagesize: 10, //默认显示10页
     iddate: [], //查询当前id
     optionsCPH: '',//车牌号
+     sfdd:[
+        {value:'是'},
+        {value:'否'}
+      ],
     options: [   //出发地和目的的
         {  value: '吉祥路',  }, 
         {  value: '豪贤路', },
@@ -214,7 +242,7 @@ methods: {
          this.$message.error("请选择司机");
            return false
       }
-      // console.log(this.iddate)
+      console.log(this.iddate)
     api_pcdUpdate({
         id: id,
         ycsj: this.iddate.ycsj,
@@ -226,6 +254,7 @@ methods: {
         ry: this.iddate.ry,
         cph: this.optionsCPH,
         sj: this.iddate.sj,
+        sfdd: this.iddate.sfdd,
         ycrxm: this.iddate.ycrxm,
         userid: this.iddate.ycruserid,
       }).then((res) => {

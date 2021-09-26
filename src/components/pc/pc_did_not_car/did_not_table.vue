@@ -15,12 +15,9 @@
           <el-table-column type="index"  label="序号" width="55"></el-table-column>
           <el-table-column  prop="ycsj" label="日期" align="center" sortable></el-table-column>
           <el-table-column prop="zt" label="状态"></el-table-column>
-          <el-table-column prop="ycrs" label="人数" align="center"></el-table-column>
           <el-table-column prop="ry" label="人员" align="center"></el-table-column>
-          <el-table-column prop="ycrxm" label="提交人" align="center"></el-table-column>
           <el-table-column prop="cfd" label="出发地" align="center"></el-table-column>
-          <el-table-column prop="mdd" label="目的地" align="center"></el-table-column>
-          <el-table-column prop="bz" label="备注" align="center"></el-table-column>
+          <el-table-column prop="mdd" label="目的地" align="center"></el-table-column>    
           <el-table-column label="操作" width="120">
             <template slot-scope="scope">
               <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>

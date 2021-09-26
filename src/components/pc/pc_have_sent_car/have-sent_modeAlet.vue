@@ -2,8 +2,12 @@
 <template>
 <div class='have-sent_modeAlet'>
  <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center>
-      <el-row class="mT">
+            <el-row class="mT">
         <el-col :span="24">
+          <el-col :span="7" class="el-seleect-letf">
+           请选择时间
+         </el-col>
+          <el-col :span="17">
           <el-date-picker
             :style="{width:'100%'}"
             v-model="iddate.ycsj"
@@ -12,8 +16,28 @@
             value-format="yyyy-MM-DD HH:mm"
             placeholder="选择日期时间"
           ></el-date-picker>
+           </el-col>
         </el-col>
       </el-row>
+
+      <el-row class="mT">
+        <el-col :span="24">
+          <el-col :span="7" class="el-seleect-letf">
+           是否等待
+         </el-col>
+         <el-col :span="17">
+            <el-select v-model="iddate.sfdd" placeholder="请选择/是否等待"  :style="{width:'100%'}"  >
+                <el-option
+                v-for="item in sfdd"
+                :key="item.value"
+                :value="item.value">
+                </el-option>
+            </el-select>
+              </el-col>
+        </el-col>
+      </el-row>
+
+
       <el-row class="mT">
         <el-col :span="24">
           <el-col :span="7" class="el-seleect-letf">
@@ -157,6 +181,10 @@ return {
     currentPage: 1, //页数
     pagesize: 10, //默认显示10页
     iddate: [], //查询当前id
+    sfdd:[
+        {value:'是'},
+        {value:'否'}
+      ],
     options: [   //出发地和目的的
         {  value: '吉祥路',  }, 
         {  value: '豪贤路', },
@@ -187,6 +215,7 @@ cancel(){  //取消
         cfd: this.iddate.cfd,
         mdd: this.iddate.mdd,
         zt: "4",
+        sfdd: this.iddate.sfdd,
         bz: this.iddate.bz,
         ry: this.iddate.ry,
         cph: this.iddate.cph,

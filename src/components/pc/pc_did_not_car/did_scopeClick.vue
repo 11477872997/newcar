@@ -27,6 +27,11 @@
                 <th>{{row.ycrs}}</th>
                 </tr>
                 <tr>
+                <tr>
+                <th>是否等待:</th>
+                <th>{{row.sfdd}}</th>
+                </tr>
+                <tr>
                 <th >备注:</th>
                 <th colspan="3">{{row.bz}}</th>
                 </tr>
@@ -61,6 +66,7 @@ watch: {},
 //方法集合
 methods: {
 parentHandleclick(row){
+    // console.log(row)
     this.row = row;
     this.dialogVisible = true;
 }
@@ -95,7 +101,7 @@ border-bottom-style: solid;
 border-bottom-color: #EBEEF5;
 width: 100%;
 }
-.table td, .table th {
+.table th, .table th {
 padding: 15px 0px;
 font-size: 16px;
 border:1px solid #EBEEF5;

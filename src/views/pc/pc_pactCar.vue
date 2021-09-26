@@ -13,9 +13,20 @@
         ></el-date-picker>
       </el-col>
       <el-col :span="7">
-        <el-input v-model="from.ry">
+        <!-- <el-input v-model="from.ry">
           <template slot="prepend">人员</template>
-        </el-input>
+        </el-input> -->
+          <el-select v-model="from.ry" placeholder="请选择/输入人员"  multiple
+    filterable
+    allow-create
+    default-first-option @blur="selectBlurry" :style="{width:'100%'}">
+                    <el-option
+                    v-for="item in ryslarr"
+                    :key="item.username"
+                    :value="item.username">
+                    </el-option>
+                </el-select>
+
       </el-col>
       <el-col :span="7">
         <el-input v-model="from.ycrs">
@@ -71,7 +82,7 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import {api_ycinsert,api_count} from '../../start/api/index.js'
+import {api_ycinsert,api_count,api_getAllUser} from '../../start/api/index.js'
 export default {
   name: 'pc_pactCar',
 //import引入的组件需要注入到对象中才能使用
@@ -93,6 +104,7 @@ return {
         {value:'是'},
         {value:'否'}
       ],
+       ryslarr:[],
        options: [   //出发地和目的的
           {  value: '吉祥路',  }, 
           {  value: '豪贤路', },
@@ -139,7 +151,7 @@ methods: {
         cfd: this.from.cfd,
         mdd: this.from.mdd,
         bz: this.from.bz,
-        ry: this.from.ry,
+        ry: this.from.ry.toString(),
         sfdd: this.from.sfdd,
         ycrxm: ycrxm,
         userid: sessionStorage.getItem('userid'),
@@ -164,15 +176,22 @@ methods: {
     },
     selectBlurmdd(e){  //目的地
             this.from.mdd = e.target.value;
+    },
+    selectBlurry(e){
+       this.from.ry = e.target.value;
+
     }
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
- this.from.ry = this.$store.state.username;
+
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
-
+ api_getAllUser().then((res) =>{
+    // console.log(res)
+    this.ryslarr = res.data;
+  })
 },
 beforeCreate() {}, //生命周期 - 创建之前
 beforeMount() {}, //生命周期 - 挂载之前
