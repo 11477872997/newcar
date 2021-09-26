@@ -103,7 +103,7 @@ methods: {
                        
                          this.$message(res.data.msg);
                         //  移动端触发
-                        this.$router.push({ path: "/h5_home" });
+                        this.$router.push({ path: "/h5_me" });
                       }else{
                         //  pc 端触发
                         // per ：类型 
@@ -165,6 +165,7 @@ mounted() {
   height: 100%;
   background-size: cover;
   overflow: hidden;
+  background-position: center 0px;
 }
 .login-wrap {
     background: #fff;

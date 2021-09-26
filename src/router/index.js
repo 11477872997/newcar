@@ -204,7 +204,7 @@ export default router
 // // // 路由守卫 
 router.beforeEach((to,from,next)=>{
    document.title = to.meta.title
-  const outerPaths = ['/login','/err','/roles','/h5_home'];   //白名单
+  const outerPaths = ['/login','/err','/roles','/h5_me'];   //白名单
   let per = sessionStorage.getItem('per');  //根据用户访问路由权限
   if(!outerPaths.includes(to.path)){     //  过滤登陆页面  防止出现死循环 内存溢出
           if(to.meta.roles == undefined){   //地址栏访问不到的路由全部404

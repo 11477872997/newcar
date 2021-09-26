@@ -13,6 +13,7 @@
 import Tb from '../../components/h5/h5_tb.vue'
 import mexx from '../../components/h5/h5_me/me_xx.vue'
 import meMen from '../../components/h5/h5_me/me_men.vue'
+import {api_getUser} from '../../start/api/index.js'
 export default {
   name: 'h5_me',
 //import引入的组件需要注入到对象中才能使用
@@ -40,6 +41,23 @@ methods: {
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
+     let  query = this.$route.query;  //获取地址栏参数
+    if(query.id !== undefined){
+        api_getUser({
+                id:query.id,
+                type:query.type
+            }).then( (res)=>{
+                // console.log(res.data)
+                sessionStorage.setItem('per',res.data.per);
+                sessionStorage.setItem("userid", res.data.userid);  //权限
+                this.zttpye = sessionStorage.getItem('per');
+                this.$store.commit("setUsername", res.data.username) //用户名
+            })
+        
+    }else{
+        this.zttpye = sessionStorage.getItem('per');
+    }
+   
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {

@@ -27,6 +27,28 @@
                 @cancel="showPicker = false"
               />
             </van-popup>
+            
+             <van-field
+              v-model="from.sfdd"
+              readonly
+              clickable
+              name="sfdd"
+              label="是否等待"
+              left-icon="manager-o"
+              placeholder="点击选择是否等待"
+              @click="showPicker3 = true"
+            />
+
+            <van-popup v-model="showPicker3" position="bottom">
+              <van-picker
+                show-toolbar
+                :columns="sfdd"
+                @confirm="onConfirm3"
+                @cancel="showPicker3 = false"
+              />
+            </van-popup>
+
+
             <van-field
               v-model="from.ry"
               clearable
@@ -34,7 +56,10 @@
               name="ry"
               left-icon="manager-o"
               placeholder="人员"
+              right-icon="arrow"
+              @click-right-icon="rytj"
             />
+            <van-action-sheet v-model="rysl" :actions="ryslarr" :round="false" @select="onrytj" />
             <van-field
               v-model="from.ycrs"
               type="digit"
@@ -94,7 +119,7 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import {api_ycinsert} from '../../../start/api/index.js'
+import {api_ycinsert,api_getAllUser} from '../../../start/api/index.js'
 import { Notify } from "vant";
 export default {
   name: 'pactcar_xx',
@@ -103,20 +128,26 @@ components: {},
 data() {
 //这里存放数据
 return {
-     showPicker: false,
+      showPicker: false,
+      showPicker3: false,
       minDate: new Date(),
       maxDate: new Date(3000, 0, 1),
       currentDate: new Date(),
+      sfdd: ["是", "否"],
    from:{
       ycsj: "", //约车时间
       ycrs: "", //约车人数
       cfd: "", //出发地
       mdd: "", //目的地
       bz: "", //备注
-      ry: "" //人员 
+      ry: "" ,//人员 
+      sfdd:'' //是否等待
    },
    show: false,
    showmdd:false,
+   rysl:false,
+   ryslarr:[],
+   arrname:[],
    actions: [
           {  name: '吉祥路',  }, 
           {  name: '豪贤路', },
@@ -136,8 +167,26 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
+  onConfirm3(value,index) {
+      //司机
+     this.from.sfdd = value;
+    //  console.log(index)
+     this.showPicker3 = false;
+    },
     hadelType(){
        this.show = true;
+    },
+    rytj(){
+       this.rysl = true;
+    },
+    onrytj(item){
+      if(this.arrname.indexOf(item.name) == -1){
+
+        this.arrname.push(item.name)
+      }
+      this.from.ry = this.arrname.toString();
+      // console.log( this.arrname)
+       this.rysl = false;
     },
     onSelect(item){ //出发地
         this.from.cfd = item.name;
@@ -197,8 +246,10 @@ methods: {
       }else if( names.mdd == ''){
         Notify({ type: 'danger', message: '目的地不能空' });
          return false;
+      }else if( names.sfdd == ''){
+        Notify({ type: 'danger', message: '是否等待不能空' });
+         return false;
       }
-
       api_ycinsert({
         ycsj: names.ycsj,
         ycrs: names.ycrs,
@@ -207,6 +258,7 @@ methods: {
         bz: names.bz,
         ry: names.ry,
         ycrxm: ycrxm,
+        sfdd:names.sfdd,
         userid: sessionStorage.getItem('userid'),
       }).then((res) => {
         if (res.code == 200) {
@@ -216,11 +268,26 @@ methods: {
       }).catch((error) => {
            Notify({ type: 'danger', message: '提交失败' });
     });
-    },
+    },  
+  convertKey (arr, key) {
+    let newArr = [];
+    arr.forEach((item, index) => {
+      let newObj = {};
+      for (var i = 0; i < key.length; i++) {
+        newObj[key[i]] = item[Object.keys(item)[i]]
+      }
+      newArr.push(newObj);
+    })
+    return newArr;
+  }
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-
+  api_getAllUser().then((res) =>{
+    let data2 = this.convertKey(res.data, ['id','password','userStatus','userType','userid','name']);
+     this.ryslarr = data2 ;
+  })
+ 
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {

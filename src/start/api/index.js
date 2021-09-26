@@ -298,6 +298,19 @@ function api_ycztUpdate(data) {
         data
     })
 }
+/**
+ * 
+ * @param {*} 用户所有用户名字 
+ * @returns 
+ */
+function api_getAllUser(data) { 
+    const url = 'yh/getAllUser';
+    return request({
+        url: url,
+        method: 'post',
+        data
+    })
+}
 export {
     api_login,
     api_count,
@@ -320,5 +333,6 @@ export {
     api_ycrxmFindAll,
     count,
     api_getUser,
-    api_ycztUpdate
+    api_ycztUpdate,
+    api_getAllUser
 }

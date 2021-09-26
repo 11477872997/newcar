@@ -38,6 +38,28 @@
                   @cancel="showPicker1 = false"
                 />
               </van-popup>
+
+              <van-field
+                        v-model="item.sfdd"
+                        readonly
+                        clickable
+                        name="sfdd"
+                        label="是否等待"
+                        left-icon="manager-o"
+                        placeholder="点击选择是否等待"
+                        @click="showPicker5 = true"
+                      />
+
+                    <van-popup v-model="showPicker5" position="bottom">
+                      <van-picker
+                        show-toolbar
+                        :columns="sfdd"
+                        @confirm="onConfirm5"
+                        @cancel="showPicker5 = false"
+                      />
+                    </van-popup>
+
+
               <van-field
                 v-model="item.ry"
                 clearable
@@ -45,7 +67,10 @@
                 name="ry"
                 left-icon="manager-o"
                 placeholder="人员"
+                right-icon="arrow"
+              @click-right-icon="rytj"
               />
+               <van-action-sheet v-model="rysl" :actions="ryslarr" :round="false" @select="onrytj" />
               <van-field
                 v-model="item.ycrs"
                 type="digit"
@@ -140,7 +165,7 @@
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 import { Notify } from "vant";
-import {api_idFindAll,getCPHAndSJXM,api_pcdUpdate} from '../../../start/api/index.js'
+import {api_idFindAll,getCPHAndSJXM,api_pcdUpdate,api_getAllUser} from '../../../start/api/index.js'
 export default {
   name: 'xqym_admin',
 //import引入的组件需要注入到对象中才能使用
@@ -153,12 +178,17 @@ return {
     minDate: new Date(),
     maxDate: new Date(3000, 0, 1),
     showPicker3: false, //司机插件
+    showPicker5: false,
+    sfdd: ["是", "否"],
     SJXM: [], //所有司机的姓名
     options: "", //车牌号
     sj:'',
     cph:'',
     show: false,
    showmdd:false,
+   rysl:false,
+   ryslarr:[],
+   arrname:[],
    actions: [
           {  name: '吉祥路',  }, 
           {  name: '豪贤路', },
@@ -178,6 +208,22 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
+  onConfirm5(value,index) {
+      //司机
+       this.mydate[0].sfdd = value;
+    //  console.log(index)
+     this.showPicker5 = false;
+    },
+   rytj(){
+       this.rysl = true;
+    },
+    onrytj(item){
+      if(this.arrname.indexOf(item.name) == -1){
+        this.arrname.push(item.name)
+      }
+      this.mydate[0].ry = this.arrname.toString();
+       this.rysl = false;
+    },
         hadelType(){
              this.show = true;
         },
@@ -196,15 +242,18 @@ methods: {
       api_idFindAll({
         id: this.$parent.$route.query.id,
       }).then((res) => {
-        console.log(res)
+        // console.log(res)
         if (res.code == 200) {
           this.mydate = res.data;
+          let  arr = res.data[0].ry;
+          this.arrname = arr.split(',');
            if( this.$parent.$route.query.zt != 3){
               this.sj = res.data[0].sj
               this.cph = res.data[0].cph
             }
         }
       });
+
     },
     onConfirm1(time) {
       //年月日
@@ -265,7 +314,8 @@ methods: {
             return false;
         }
       //发送
-      console.log(this.mydate)
+      // console.log(this.mydate)
+      // console.log(values)
       //修改订单
       api_pcdUpdate({
         id: values.id,
@@ -277,6 +327,7 @@ methods: {
         bz: values.bz,
         ry: values.ry,
         cph: values.cph,
+        sfdd:values.sfdd,
         ycrxm: this.mydate.ycrxm,
         userid: this.mydate.ycruserid,
         sj: values.sj.substring(0,3),
@@ -287,10 +338,24 @@ methods: {
         }
       });
     },
+     convertKey (arr, key) {
+    let newArr = [];
+    arr.forEach((item, index) => {
+      let newObj = {};
+      for (var i = 0; i < key.length; i++) {
+        newObj[key[i]] = item[Object.keys(item)[i]]
+      }
+      newArr.push(newObj);
+    })
+    return newArr;
+  }
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-
+  api_getAllUser().then((res) =>{
+      let data2 = this.convertKey(res.data, ['id','password','userStatus','userType','userid','name']);
+      this.ryslarr = data2 ;
+    })
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {

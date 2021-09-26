@@ -22,7 +22,7 @@ data() {
 //这里存放数据
 return {
     active:"",//高亮选中
-    mydata:require('../../../start/json/h5.men.json')
+    mydata:[]
 };
 },
 //监听属性 类似于data概念
@@ -45,7 +45,15 @@ methods: {
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-
+let per = sessionStorage.getItem('per');
+   if(per == 'admin'){
+     this.mydata = require('../../../start/json/h5_men.json')
+     return false;
+   }
+   if(per == 'SJ' || per == 'user'){
+     this.mydata = require('../../../start/json/h5_user.json')
+     return false;
+   }
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {

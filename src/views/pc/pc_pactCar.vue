@@ -48,9 +48,22 @@
         </el-input>
       </el-col>
 
+    </el-row>
+    <el-row :gutter="20" class="mB">
+      <el-col :span="7">
+           <el-select v-model="from.sfdd" placeholder="请选择/是否等待"  :style="{width:'100%'}"  >
+                <el-option
+                v-for="item in sfdd"
+                :key="item.value"
+                :value="item.value">
+                </el-option>
+            </el-select>
+      </el-col>
+      
       <el-col :span="2">
         <el-button type="primary" icon="el-icon-search" @click="onSubmit">约车</el-button>
       </el-col>
+
     </el-row>
 </div>
 </template>
@@ -74,7 +87,12 @@ return {
         ry: "",
         bz: "",
         ycrs: "",
+        sfdd:"",
       },
+      sfdd:[
+        {value:'是'},
+        {value:'否'}
+      ],
        options: [   //出发地和目的的
           {  value: '吉祥路',  }, 
           {  value: '豪贤路', },
@@ -111,6 +129,9 @@ methods: {
       }else if( this.from.mdd == ''){
         this.$message({ type: 'danger', message: '目的地不能空' });
          return false;
+      }else if( this.from.sfdd == ''){
+        this.$message({ type: 'danger', message: '是否等待不能空' });
+         return false;
       }
       api_ycinsert({
         ycsj: this.from.ycsj,
@@ -119,6 +140,7 @@ methods: {
         mdd: this.from.mdd,
         bz: this.from.bz,
         ry: this.from.ry,
+        sfdd: this.from.sfdd,
         ycrxm: ycrxm,
         userid: sessionStorage.getItem('userid'),
       }).then((res) => {
