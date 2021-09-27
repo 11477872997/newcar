@@ -19,6 +19,7 @@ data() {
 //这里存放数据
 return {
     mydata:'',
+    timer:null
 };
 },
 //监听属性 类似于data概念
@@ -27,63 +28,67 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
+   getmen(){
 
+        let per =  sessionStorage.getItem('per');
+          if(per == 'admin'){
+            this.mydata = require('../../../start/json/h5_admin.json');
+            count({}).then((res)=>{
+                let wp = res.data[0].wp;
+                let yp = res.data[0].yp;
+                for(let i = 0 ;i<this.mydata.length;i++){
+                  if( this.mydata[i].text  == '未派车'){
+                      this.mydata[i].badge = wp
+                  };
+                  if( this.mydata[i].text  == '已派车'){
+                      this.mydata[i].badge = yp
+                  };
+                  
+                }
+              
+            })
+            return false;  
+          }
+          if(per == 'SJ'){
+            this.mydata = require('../../../start/json/h5_dirver.json');
+            for(let i = 0 ;i<this.mydata.length;i++){
+                  //  this.mydata[i].to = '/h5_clxqye?id=10000'
+                  this.mydata[i].to = '/h5_clxqye?id='+sessionStorage.getItem('userid')
+                  }
+            return false;  
+          }
+          if(per == 'user'){
+            let ycrxm = this.$store.state.username; //约车人
+              this.mydata = require('../../../start/json/h5user.json');
+            api_ycrxmFindAll({ycrxm: ycrxm, zt: "3" }).then((res)=>{
+                  let wp = res.data.length;
+                      for(let i = 0 ;i<this.mydata.length;i++){
+                              if( this.mydata[i].text  == '未派车'){
+                                  this.mydata[i].badge = wp
+                              };
+                      }
+            })
+            api_ycrxmFindAll({ycrxm: ycrxm, zt: "4" }).then((res)=>{
+                  let yp = res.data.length;
+                      for(let i = 0 ;i<this.mydata.length;i++){
+                              if( this.mydata[i].text  == '已派车'){
+                                  this.mydata[i].badge = yp
+                              };
+                      }
+            })
+              return false; 
+
+          }
+   }
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-  let per = sessionStorage.getItem('per');
-   if(per == 'admin'){
-     this.mydata = require('../../../start/json/h5_admin.json');
-     count({}).then((res)=>{
-        let wp = res.data[0].wp;
-        let yp = res.data[0].yp;
-        for(let i = 0 ;i<this.mydata.length;i++){
-          if( this.mydata[i].text  == '未派车'){
-              this.mydata[i].badge = wp
-          };
-          if( this.mydata[i].text  == '已派车'){
-              this.mydata[i].badge = yp
-          };
-          
-        }
-       
-     })
-     return false;  
-   }
-   if(per == 'SJ'){
-     this.mydata = require('../../../start/json/h5_dirver.json');
-    for(let i = 0 ;i<this.mydata.length;i++){
-          //  this.mydata[i].to = '/h5_clxqye?id=10000'
-           this.mydata[i].to = '/h5_clxqye?id='+sessionStorage.getItem('userid')
-           }
-     return false;  
-   }
-   if(per == 'user'){
-     let ycrxm = this.$store.state.username; //约车人
-      this.mydata = require('../../../start/json/h5user.json');
-    api_ycrxmFindAll({ycrxm: ycrxm, zt: "3" }).then((res)=>{
-          let wp = res.data.length;
-              for(let i = 0 ;i<this.mydata.length;i++){
-                      if( this.mydata[i].text  == '未派车'){
-                          this.mydata[i].badge = wp
-                      };
-              }
-     })
-    api_ycrxmFindAll({ycrxm: ycrxm, zt: "4" }).then((res)=>{
-          let yp = res.data.length;
-              for(let i = 0 ;i<this.mydata.length;i++){
-                      if( this.mydata[i].text  == '已派车'){
-                          this.mydata[i].badge = yp
-                      };
-              }
-     })
-      return false; 
-
-   }
+ 
 
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
+this.timer = setTimeout(this.getmen, 10);
 
 },
 beforeCreate() {}, //生命周期 - 创建之前
