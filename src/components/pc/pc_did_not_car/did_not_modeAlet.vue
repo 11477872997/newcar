@@ -79,9 +79,28 @@
       </el-row>
       <el-row class="mT">
         <el-col :span="24">
-          <el-input v-model="iddate.ry">
+          <!-- <el-input v-model="iddate.ry">
             <template slot="prepend">人&emsp;员</template>
-          </el-input>
+          </el-input> -->
+           <el-col :span="4" class="el-seleect-letf">
+           人&emsp;员
+         </el-col>
+          <el-col :span="20">
+    
+              <el-select v-model="iddate.ry" 
+              placeholder="请选择/输入人员"  
+              multiple
+             filterable
+            allow-create
+            default-first-option
+             @blur="selectBlurry" :style="{width:'100%'}">
+                    <el-option
+                    v-for="item in ryslarr"
+                    :key="item.username"
+                    :value="item.username">
+                    </el-option>
+                </el-select>
+                  </el-col>
         </el-col>
       </el-row>
       <el-row class="mT">
@@ -167,7 +186,7 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import { api_idFindAll,api_pcdUpdate,api_dpdFindAll,api_count} from '../../../start/api/index.js'
+import { api_idFindAll,api_pcdUpdate,api_dpdFindAll,api_count,api_getAllUser} from '../../../start/api/index.js'
 export default {
   name: 'did_not_modeAlet',
 //import引入的组件需要注入到对象中才能使用
@@ -185,6 +204,7 @@ return {
         {value:'是'},
         {value:'否'}
       ],
+      ryslarr:[],
     options: [   //出发地和目的的
         {  value: '吉祥路',  }, 
         {  value: '豪贤路', },
@@ -205,6 +225,10 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
+  selectBlurry(e){
+       this.iddate.ry = e.target.value;
+
+    },
     getRowKeys(row) {
       //保存上一页的数据
       return row.e;
@@ -221,7 +245,8 @@ methods: {
             api_idFindAll({ id: row.id }).then((res) => {
                 if (res.code == 200) {
                 this.iddate = res.data[0];
-                // console.log(res.data)
+                // console.log(this.iddate)
+                this.iddate.ry = this.iddate.ry.split(',');
                 }
             });
         this.centerDialogVisible = true;
@@ -238,11 +263,17 @@ methods: {
   },
   conserve(id){  //保存
     //保存
+    //  console.log(this.iddate.sfdd)
+     if(this.iddate.sfdd ==  undefined){
+         this.$message.error("请选择是否等待");
+           return false
+      }
     if(this.iddate.sj == undefined){
          this.$message.error("请选择司机");
            return false
       }
-      console.log(this.iddate)
+   
+      // console.log(this.iddate.sfdd)
     api_pcdUpdate({
         id: id,
         ycsj: this.iddate.ycsj,
@@ -251,7 +282,7 @@ methods: {
         mdd: this.iddate.mdd,
         zt: "4",
         bz: this.iddate.bz,
-        ry: this.iddate.ry,
+        ry: this.iddate.ry.toString(),
         cph: this.optionsCPH,
         sj: this.iddate.sj,
         sfdd: this.iddate.sfdd,
@@ -282,11 +313,14 @@ methods: {
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-
+ api_getAllUser().then((res) =>{
+    // console.log(res)
+    this.ryslarr = res.data;
+  })
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
-
+  
 },
 beforeCreate() {}, //生命周期 - 创建之前
 beforeMount() {}, //生命周期 - 挂载之前

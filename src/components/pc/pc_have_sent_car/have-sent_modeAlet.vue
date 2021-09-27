@@ -1,7 +1,7 @@
 <!-- 已派车编辑页面 -->
 <template>
 <div class='have-sent_modeAlet'>
- <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center>
+ <el-dialog title="提示" :visible.sync="centerDialogVisible" width="35%" center>
             <el-row class="mT">
         <el-col :span="24">
           <el-col :span="7" class="el-seleect-letf">
@@ -79,9 +79,28 @@
       </el-row>
       <el-row class="mT">
         <el-col :span="24">
-          <el-input v-model="iddate.ry">
+          <!-- <el-input v-model="iddate.ry">
             <template slot="prepend">人&emsp;员</template>
-          </el-input>
+          </el-input> -->
+             <el-col :span="4" class="el-seleect-letf">
+           人&emsp;员
+         </el-col>
+          <el-col :span="20">
+    
+              <el-select v-model="iddate.ry" 
+              placeholder="请选择/输入人员"  
+              multiple
+             filterable
+            allow-create
+            default-first-option
+             @blur="selectBlurry" :style="{width:'100%'}">
+                    <el-option
+                    v-for="item in ryslarr"
+                    :key="item.username"
+                    :value="item.username">
+                    </el-option>
+                </el-select>
+                  </el-col>
         </el-col>
       </el-row>
       <el-row class="mT">
@@ -168,7 +187,7 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import { api_idFindAll,api_pcdUpdate,api_ypdFindAll,api_count} from '../../../start/api/index.js'
+import { api_idFindAll,api_pcdUpdate,api_ypdFindAll,api_count,api_getAllUser} from '../../../start/api/index.js'
 export default {
   name: 'have-sent_modeAlet',
 //import引入的组件需要注入到对象中才能使用
@@ -185,6 +204,7 @@ return {
         {value:'是'},
         {value:'否'}
       ],
+       ryslarr:[],
     options: [   //出发地和目的的
         {  value: '吉祥路',  }, 
         {  value: '豪贤路', },
@@ -204,6 +224,10 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
+  selectBlurry(e){
+       this.iddate.ry = e.target.value;
+
+    },
 cancel(){  //取消
      this.centerDialogVisible = false;
   },
@@ -217,7 +241,7 @@ cancel(){  //取消
         zt: "4",
         sfdd: this.iddate.sfdd,
         bz: this.iddate.bz,
-        ry: this.iddate.ry,
+        ry: this.iddate.ry.toString(),
         cph: this.iddate.cph,
         sj: this.iddate.sj,
         ycrxm: this.iddate.ycrxm,
@@ -254,7 +278,7 @@ cancel(){  //取消
             api_idFindAll({ id: row.id }).then((res) => {
                         if (res.code == 200) {
                         this.iddate = res.data[0];
-                        
+                         this.iddate.ry = this.iddate.ry.split(',');
                         }
                     });
         this.centerDialogVisible = true;
@@ -275,7 +299,10 @@ cancel(){  //取消
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-
+ api_getAllUser().then((res) =>{
+    // console.log(res)
+    this.ryslarr = res.data;
+  })
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {

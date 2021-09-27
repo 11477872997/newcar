@@ -44,12 +44,17 @@
         ></el-pagination>
       </el-col>
     </el-row>
-    <el-button
-      type="primary"
-      size="small"
-      style="right: 30px;position: absolute;"
-      @click="dcExcle()"
-    >导出EXCEL</el-button>
+    <el-row >
+      <el-col :span="24">
+        <el-button
+        type="primary"
+        size="small"
+        
+        @click="dcExcle()"
+      >导出EXCEL</el-button>
+      </el-col>
+    </el-row>
+   
     <havesentmodeAlet  ref="mychild"/>
     <havesentScopeClick ref="didScopeClick" />
 </div>
