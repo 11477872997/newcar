@@ -164,7 +164,20 @@ return {
 //监听属性 类似于data概念
 computed: {},
 //监控data中的数据变化
-watch: {},
+watch: {
+   "from.ry":{
+       handler(val,oldVal){
+         if(val != ''){
+           let  arrnewlength = val.split(',');
+            this.from.ycrs = arrnewlength.length;
+         }else{
+           this.from.ycrs = '';
+           this.arrname = [];
+         }
+       },
+       deep:true //深度监听
+   }
+},
 //方法集合
 methods: {
   onConfirm3(value,index) {
@@ -181,11 +194,11 @@ methods: {
     },
     onrytj(item){
       if(this.arrname.indexOf(item.name) == -1){
-
         this.arrname.push(item.name)
       }
       this.from.ry = this.arrname.toString();
-      // console.log( this.arrname)
+      // this. from. ycrs = this.arrname.length;
+      // console.log( this.arrname.length)
        this.rysl = false;
     },
     onSelect(item){ //出发地
@@ -214,9 +227,12 @@ methods: {
       }
       return val;
     },
-    onConfirm(time) {
-      //年月日
-      let youWant =
+    onConfirm(time) { //选择时间
+      this.from.ycsj = this.dataTime(time);
+      this.showPicker = false;
+    },
+    dataTime(time){  //处理时间
+         let youWant =
         time.getFullYear() +
         "-" +
         (time.getMonth() + 1) +
@@ -226,8 +242,8 @@ methods: {
         (time.getHours() >= 10 ? time.getHours() : "0" + time.getHours()) +
         ":" +
         (time.getMinutes() >= 10 ? time.getMinutes() : "0" + time.getMinutes());
-      this.from.ycsj = youWant;
-      this.showPicker = false;
+        return youWant
+
     },
  onSubmit(names) {
       let ycrxm = this.$store.state.username; //约车人
@@ -291,7 +307,10 @@ created() {
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
-
+  //获取当前时间
+  let time = new Date;  
+  this.from.ycsj = this.dataTime(time);
+  this.from.sfdd = this.sfdd[1];
 },
 beforeCreate() {}, //生命周期 - 创建之前
 beforeMount() {}, //生命周期 - 挂载之前

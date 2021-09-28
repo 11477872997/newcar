@@ -121,7 +121,18 @@ return {
 //监听属性 类似于data概念
 computed: {},
 //监控data中的数据变化
-watch: {},
+watch: {
+   "from.ry":{
+       handler(val,oldVal){
+         if(val != ''){
+            this.from.ycrs = val.length;
+         }else{
+           this.from.ycrs = '';
+         }
+       },
+       deep:true //深度监听
+   }
+},
 //方法集合
 methods: {
      onSubmit() {
@@ -180,7 +191,21 @@ methods: {
     selectBlurry(e){
        this.from.ry = e.target.value;
 
-    }
+    },
+     dataTime(time){  //处理时间
+         let youWant =
+        time.getFullYear() +
+        "-" +
+        (time.getMonth() + 1) +
+        "-" +
+        time.getDate() +
+        " " +
+        (time.getHours() >= 10 ? time.getHours() : "0" + time.getHours()) +
+        ":" +
+        (time.getMinutes() >= 10 ? time.getMinutes() : "0" + time.getMinutes());
+        return youWant
+
+    },
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
@@ -192,6 +217,10 @@ mounted() {
     // console.log(res)
     this.ryslarr = res.data;
   })
+  //获取当前时间
+  let time = new Date;  
+  this.from.ycsj = this.dataTime(time);
+   this.from.sfdd = '否'
 },
 beforeCreate() {}, //生命周期 - 创建之前
 beforeMount() {}, //生命周期 - 挂载之前
