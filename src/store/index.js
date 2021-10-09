@@ -8,7 +8,7 @@ const store = new Vuex.Store({
     state: {
         username: '', //用户名
         Did_not_send:"",//未派车
-        Have_sent:'',//已派车
+        Have_sent:'',//已派车,
         tabsItem: {     //保存刷新的tab的值
             currTabsItem: "",
             currTabsPath: "",

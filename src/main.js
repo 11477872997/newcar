@@ -22,9 +22,9 @@ import VePie from 'v-charts/lib/pie.common'
 Vue.component(VeHistogram.name, VeHistogram);
 Vue.component(VePie.name, VePie);
 
-// import VConsole from 'vconsole';
-// let vconsole = new VConsole();
-// export default vconsole;
+import VConsole from 'vconsole';
+let vconsole = new VConsole();
+export default vconsole;
 
 new Vue({
   router,

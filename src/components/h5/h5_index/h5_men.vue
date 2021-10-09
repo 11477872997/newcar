@@ -44,6 +44,7 @@ watch: {
 methods: {
   getmen(){
     let per = sessionStorage.getItem('per');
+     console.log(per+'-----men')
       if(per == 'admin'){
         this.mydata = require('../../../start/json/h5_men.json')
         return false;
@@ -60,7 +61,7 @@ created() {
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
-this.timer = setTimeout(this.getmen, 10);
+this.timer = setTimeout(this.getmen, 500);
 },
 beforeCreate() {}, //生命周期 - 创建之前
 beforeMount() {}, //生命周期 - 挂载之前

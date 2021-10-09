@@ -47,12 +47,11 @@ created() {
                 id:query.id,
                 type:query.type
             }).then( (res)=>{
-                // console.log(res.data)
                 sessionStorage.setItem('per',res.data.per);
                 sessionStorage.setItem("userid", res.data.userid);  //权限
                 this.$store.commit("setUsername", res.data.username) //用户名
             })
-        
+
     }
    
 },
