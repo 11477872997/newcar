@@ -314,7 +314,9 @@ methods: {
             return false;
         }
       //发送
-      // console.log(this.mydate)
+      console.log(this.mydate)
+      // console.log(this.mydate.ycrxm)
+      // return
       // console.log(values)
       //修改订单
       api_pcdUpdate({
@@ -328,8 +330,8 @@ methods: {
         ry: values.ry,
         cph: values.cph,
         sfdd:values.sfdd,
-        ycrxm: this.mydate.ycrxm,
-        userid: this.mydate.ycruserid,
+        ycrxm: this.mydate[0].ycrxm,
+        userid: this.mydate[0].ycruserid,
         sj: values.sj.substring(0,3),
       }).then((res) => {
         if (res.code == 200) {

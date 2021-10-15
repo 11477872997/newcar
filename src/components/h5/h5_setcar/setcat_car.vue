@@ -52,7 +52,7 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import { Notify } from "vant";
+import { Notify ,Dialog} from "vant";
 import { getCPHAndSJXM,api_deletes } from "../../../start/api/index.js";
 export default {
   name: 'setcat_car',
@@ -79,14 +79,26 @@ methods: {
       this.$router.push({ path: "/h5_clxqye", query: { id: id } }); ///跳转详细页面
     },
     SCDD(id) {
-      //删除订单
-      api_deletes({cph: id })
-        .then((res) => {
-          if (res.code == 200) {
-           Notify({ type: 'success', message: '删除成功' });
-            this.goapi();
-          }
+       //取消订单
+      Dialog.confirm({
+        title: "车辆管理",
+        message: "您确定呀删除吗？",
+      }) .then(() => {
+          //删除订单
+            api_deletes({cph: id })
+              .then((res) => {
+                if (res.code == 200) {
+                Notify({ type: 'success', message: '删除成功' });
+                  this.goapi();
+                }
+              })
         })
+        .catch(() => {
+          console.log("取消");
+          // on cancel
+        });
+   
+     
     },
     onSearch() {
       //搜索

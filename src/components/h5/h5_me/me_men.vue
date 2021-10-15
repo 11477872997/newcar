@@ -3,14 +3,24 @@
 <div class='me_men'>
     <van-grid :gutter="3" :column-num="3">
         <van-grid-item v-for="item in mydata" :key="item.id" :icon="item.icon" :to="item.to" :text="item.text" :badge="item.badge" />
-        </van-grid>
+      </van-grid>
+      <div class=""  v-if="falg">
+        <van-notice-bar
+          left-icon="volume-o"
+          scrollable 
+          text="默认按钮状态为红色为“在勤”,点击按钮变为绿色为“待命”。"
+        />
+        <van-button style="margin:15px" :type=typename @click="xgzt()">车辆状态</van-button>
+      </div>
+     
 </div>
 </template>
 
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import {count,api_ycrxmFindAll} from '../../../start/api/index.js'
+import {count,api_ycrxmFindAll,api_selectdqcl,api_clxxUpdate} from '../../../start/api/index.js'
+import { Notify ,Dialog} from "vant";
 export default {
   name: 'me_men',
 //import引入的组件需要注入到对象中才能使用
@@ -19,7 +29,10 @@ data() {
 //这里存放数据
 return {
     mydata:'',
-    timer:null
+    timer:null,
+    falg:false,
+    sjdata:'' ,//司机数据
+    typename:'',
 };
 },
 //监听属性 类似于data概念
@@ -50,11 +63,22 @@ methods: {
             return false;  
           }
           if(per == 'SJ'){
-            this.mydata = require('../../../start/json/h5_dirver.json');
-            for(let i = 0 ;i<this.mydata.length;i++){
-                  //  this.mydata[i].to = '/h5_clxqye?id=10000'
-                  this.mydata[i].to = '/h5_clxqye?id='+sessionStorage.getItem('userid')
-                  }
+            this.falg = true;
+             api_selectdqcl({id:sessionStorage.getItem('userid') }).then((res) => {
+               this.sjdata = res.data.result;
+               if(res.data.result.zt == '6'){
+                 this.typename = 'primary';
+               }else if(res.data.result.zt == '5'){
+                 this.typename = 'danger';
+               }else{
+                  this.typename = 'info';
+               }
+              });
+            // this.mydata = require('../../../start/json/h5_dirver.json');
+            // for(let i = 0 ;i<this.mydata.length;i++){
+            //       //  this.mydata[i].to = '/h5_clxqye?id=10000'
+            //       this.mydata[i].to = '/h5_clxqye?id='+sessionStorage.getItem('userid')
+            //       }
             return false;  
           }
           if(per == 'user'){
@@ -79,6 +103,30 @@ methods: {
               return false; 
 
           }
+   },
+   xgzt(){
+       //取消订单
+      Dialog.confirm({
+        title: "车辆状态",
+        message: "您确定呀修改为待命吗？",
+      }) .then(() => {
+            api_clxxUpdate({
+          zt: '6',
+          sj: this.sjdata.sj,
+          cph: this.sjdata.cph,
+          id: this.sjdata.id
+        }).then((res) => {
+            if (res.code == 200) {
+              Notify({ type: 'success', message: '修改成功' });
+              this.typename = 'primary';
+            }
+          })
+        })
+        .catch(() => {
+          console.log("取消");
+          // on cancel
+        });
+   
    }
 },
 //生命周期 - 创建完成（可以访问当前this实例）
