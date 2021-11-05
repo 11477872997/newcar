@@ -151,10 +151,10 @@
           header-row-class-name="tableHead"
         >
           <el-table-column   prop="zt" label="状态">
-            <template scope="scope">
-                    <span v-if="scope.row.zt=== '在勤'" :style="{color:'#F56C6C'}">在勤</span>
-                    <span v-else-if="scope.row.zt=== '待命'" :style="{color:'#67C23A'}">待命</span>
-                    <span v-else  :style="{color:'#409EFF'}">待勤</span>
+            <template slot-scope="scope">
+                    <span v-if="scope.row.zt=== '出勤'" :style="{color:'#F56C6C'}">出勤</span>
+                    <span v-else-if="scope.row.zt=== '待勤'" :style="{color:'#67C23A'}">待勤</span>
+                    <span v-else  :style="{color:'#409EFF'}">待勤中(可拼车)</span>
              </template>
           </el-table-column>
           <el-table-column prop="sj" label="司机" align="center"></el-table-column>

@@ -11,7 +11,7 @@
               readonly
               clickable
               name="ycsj"
-              label="时间选择"
+              label="出发时间"
               placeholder="点击选择时间"
               @click="showPicker = true"
               left-icon="todo-list-o"

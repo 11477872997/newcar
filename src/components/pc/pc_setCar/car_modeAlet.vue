@@ -52,15 +52,15 @@ return {
     options: [
         {
           value: "6",
-          label: "待命",
+          label: "待勤",
         },
         {
           value: "5",
-          label: "在勤",
+          label: "出勤",
         },
         {
           value: "7",
-          label: "待勤",
+          label: "待勤中(可拼车)",
         },
       ],
 };

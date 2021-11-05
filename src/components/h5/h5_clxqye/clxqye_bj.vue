@@ -77,7 +77,7 @@ data() {
 //这里存放数据
 return {
       mydate: [],
-      sjs: ["在勤", "待命", "待勤"],
+      sjs: ["出勤", "待勤", "待勤中(可拼车)"],
       sj: "",
       showPicker3: false,
 };
@@ -103,11 +103,11 @@ methods: {
      api_selectdqcl({id: id }).then((res) => {
           if (res.code == 200) {
             if(res.data.result.zt == '5'){
-                res.data.result.zt = '在勤'
+                res.data.result.zt = '出勤'
               }else if(res.data.result.zt == '6'){
-                 res.data.result.zt = '待命'
+                 res.data.result.zt = '待勤'
               }else if(res.data.result.zt == '7'){
-                  res.data.result.zt = '待勤'
+                  res.data.result.zt = '待勤中(可拼车)'
               }
             this.mydate = res.data.result;
           }
@@ -116,11 +116,11 @@ methods: {
     onSubmit(values) {
       //保存
       let zt = '';
-      if(values.zt == '在勤'){
+      if(values.zt == '出勤'){
           zt = '5'
-      }else if(values.zt == '待命'){
-          zt = '6'
       }else if(values.zt == '待勤'){
+          zt = '6'
+      }else if(values.zt == '待勤中(可拼车)'){
           zt = '7'
       }
       let sj = values.sj.trim();

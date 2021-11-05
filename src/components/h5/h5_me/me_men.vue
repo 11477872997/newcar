@@ -8,9 +8,9 @@
         <van-notice-bar
           left-icon="volume-o"
           scrollable 
-          text="默认按钮状态为红色为“在勤”,点击按钮变为绿色为“待命”。"
+          text="默认按钮状态为红色为“出勤”,点击按钮变为绿色为“待勤”，如果按钮变为蓝色请找管理员处理。"
         />
-        <van-button style="margin:15px" :type=typename @click="xgzt()">车辆状态</van-button>
+        <van-button style="margin:15px" :type=typename @click="xgzt()">{{namezt}}</van-button>
       </div>
      
 </div>
@@ -33,6 +33,7 @@ return {
     falg:false,
     sjdata:'' ,//司机数据
     typename:'',
+    namezt:"",//司机车辆状态
 };
 },
 //监听属性 类似于data概念
@@ -66,12 +67,16 @@ methods: {
             this.falg = true;
              api_selectdqcl({id:sessionStorage.getItem('userid') }).then((res) => {
                this.sjdata = res.data.result;
+               console.log(res)
                if(res.data.result.zt == '6'){
                  this.typename = 'primary';
+                  this.namezt = '待勤';
                }else if(res.data.result.zt == '5'){
                  this.typename = 'danger';
+                 this.namezt = '出勤';
                }else{
                   this.typename = 'info';
+                   this.namezt = '状态不确定';
                }
               });
             // this.mydata = require('../../../start/json/h5_dirver.json');
@@ -108,7 +113,7 @@ methods: {
        //取消订单
       Dialog.confirm({
         title: "车辆状态",
-        message: "您确定呀修改为待命吗？",
+        message: "您确定呀修改为待勤吗？",
       }) .then(() => {
             api_clxxUpdate({
           zt: '6',
@@ -116,8 +121,10 @@ methods: {
           cph: this.sjdata.cph,
           id: this.sjdata.id
         }).then((res) => {
+          
             if (res.code == 200) {
               Notify({ type: 'success', message: '修改成功' });
+              this.namezt = '待勤'
               this.typename = 'primary';
             }
           })
