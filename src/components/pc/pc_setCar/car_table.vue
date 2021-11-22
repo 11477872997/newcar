@@ -99,13 +99,11 @@ methods: {
         }).then(() => {
         //删除
             api_deletes({ cph: row.cph }).then((res) => {
-            if (res.code == 200) {
                 this.$message({
                     message: '删除成功',
                     type: 'success'
                 });
                 api_pccxsyFindAll({});
-            };
             })
           
         }).catch(() => {

@@ -189,17 +189,7 @@ return {
    rysl:false,
    ryslarr:[],
    arrname:[],
-   actions: [
-          {  name: '吉祥路',  }, 
-          {  name: '豪贤路', },
-          {  name: '市府', }, 
-          {  name: '环市路468大院', },
-          {  name: '体育东省厅'},
-          {  name: ' 白云分院(白云大道)'},
-          {  name: '天河分院'},
-          {  name: '番禺分院'},
-          {  name: '南沙分院'}
-          ]
+   actions:require('../../../start/json/actions.json')
 };
 },
 //监听属性 类似于data概念
@@ -243,7 +233,6 @@ methods: {
         id: this.$parent.$route.query.id,
       }).then((res) => {
         // console.log(res)
-        if (res.code == 200) {
           this.mydate = res.data;
           let  arr = res.data[0].ry;
           this.arrname = arr.split(',');
@@ -251,7 +240,6 @@ methods: {
               this.sj = res.data[0].sj
               this.cph = res.data[0].cph
             }
-        }
       });
 
     },
@@ -298,13 +286,11 @@ methods: {
     AndSJXM() {
       //查询司机和车牌号
       getCPHAndSJXM({}).then((res) => {
-        if (res.code == 200) {
         //   console.log(res.data)
           for (let key of res.data) {
             this.SJXM.push(key.sj+"("+key.zt+")");
           }
           this.options = res.data;
-        }
       });
     },
     onSubmit(values) {
@@ -334,10 +320,8 @@ methods: {
         userid: this.mydate[0].ycruserid,
         sj: values.sj.substring(0,3),
       }).then((res) => {
-        if (res.code == 200) {
           Notify({ type: "success", message: "处理成功" });
           this.$router.go(-2);
-        }
       });
     },
      convertKey (arr, key) {

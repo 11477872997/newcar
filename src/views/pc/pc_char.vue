@@ -78,14 +78,12 @@ methods: {
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
  api_getSJNum({}).then((res) => {
-      if (res.code == 200) {
         let data = res.data;
         let newArr = data.map((item) => ({
           '司机': item.sj,
           '订单总数': item.num,
         }));
         this.chartData.rows = newArr;
-      }
     });
     this.getDy();
 },

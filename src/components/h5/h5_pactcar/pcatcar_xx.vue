@@ -148,17 +148,7 @@ return {
    rysl:false,
    ryslarr:[],
    arrname:[],
-   actions: [
-          {  name: '吉祥路',  }, 
-          {  name: '豪贤路', },
-          {  name: '市府', }, 
-          {  name: '环市路468大院', },
-          {  name: '体育东省厅'},
-          {  name: ' 白云分院(白云大道)'},
-          {  name: '天河分院'},
-          {  name: '番禺分院'},
-          {  name: '南沙分院'}
-          ]
+   actions:require('../../../start/json/actions.json')
 };
 },
 //监听属性 类似于data概念
@@ -277,10 +267,8 @@ methods: {
         sfdd:names.sfdd,
         userid: sessionStorage.getItem('userid'),
       }).then((res) => {
-        if (res.code == 200) {
            Notify({ type: "success", message: "提交成功"});
            this.$router.go(-1);
-        }
       }).catch((error) => {
            Notify({ type: 'danger', message: '提交失败' });
     });
@@ -311,6 +299,7 @@ mounted() {
   let time = new Date;  
   this.from.ycsj = this.dataTime(time);
   this.from.sfdd = this.sfdd[1];
+  this.from.ry = this.$store.state.username;
 },
 beforeCreate() {}, //生命周期 - 创建之前
 beforeMount() {}, //生命周期 - 挂载之前

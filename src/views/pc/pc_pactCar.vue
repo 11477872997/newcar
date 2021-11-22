@@ -39,8 +39,8 @@
            <el-select v-model="from.cfd" placeholder="请选择/输入出发地" filterable @blur="selectBlurcfd" :style="{width:'100%'}">
                 <el-option
                 v-for="item in options"
-                :key="item.value"
-                :value="item.value">
+                :key="item.name"
+                :value="item.name">
                 </el-option>
             </el-select>
       </el-col>
@@ -48,8 +48,8 @@
              <el-select v-model="from.mdd" placeholder="请选择/输入目的地" filterable @blur="selectBlurmdd" :style="{width:'100%'}">
                 <el-option
                 v-for="item in options"
-                :key="item.value"
-                :value="item.value">
+                :key="item.name"
+                :value="item.name">
                 </el-option>
             </el-select>
       </el-col>
@@ -105,17 +105,7 @@ return {
         {value:'否'}
       ],
        ryslarr:[],
-       options: [   //出发地和目的的
-          {  value: '吉祥路',  }, 
-          {  value: '豪贤路', },
-          {  value: '市府', }, 
-          {  value: '环市路468大院', },
-          {  value: '体育东省厅'},
-          {  value: ' 白云分院(白云大道)'},
-          {  value: '天河分院'},
-          {  value: '番禺分院'},
-          {  value: '南沙分院'}
-        ],
+       options: require('../../start/json/actions.json')
 };
 },
 //监听属性 类似于data概念
@@ -168,7 +158,6 @@ methods: {
         userid: sessionStorage.getItem('userid'),
       }).then((res) => {
         // console.log(res)
-        if (res.code == 200) {
            this.$message({
             message: "约车成功",
             type: "success",
@@ -177,7 +166,6 @@ methods: {
           for(let key in this.from){  //清空表单的值
               this.from[key]  = ''
           }
-        }
       }).catch((error) => {
        this.$message.error("录入失败");
     });
@@ -221,6 +209,7 @@ mounted() {
   let time = new Date;  
   this.from.ycsj = this.dataTime(time);
    this.from.sfdd = '否'
+ 
 },
 beforeCreate() {}, //生命周期 - 创建之前
 beforeMount() {}, //生命周期 - 挂载之前

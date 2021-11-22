@@ -51,7 +51,6 @@ methods: {
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
   api_getSJNum({}).then((res) => {
-      if (res.code == 200) {
         this.mydata = res.data;
          var data = res.data;
           var chart = new this.F2.Chart({
@@ -83,7 +82,6 @@ created() {
           // 柱状图添加文本
           chart.render();
         
-      }
     });
 },
 //生命周期 - 挂载完成（可以访问DOM元素）

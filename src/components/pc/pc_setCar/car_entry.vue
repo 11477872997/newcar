@@ -59,12 +59,10 @@ methods: {
             cph:this.from.cph.trim(), 
             sj:this.from.sj.trim() 
             }).then((res) => {
-                if (res.code == 200) {
                 this.$message({
                     message: "录入成功",
                     type: "success",
                 });
-                }
             this.cancel();
             api_pccxsyFindAll({});
             }).catch((error) => {

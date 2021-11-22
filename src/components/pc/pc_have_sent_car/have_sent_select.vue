@@ -103,9 +103,9 @@ methods: {
           cph: this.from.cph,
           zt: '已处理'
       }).then((res) => {
-          if (res.code == 200) {
+          
              this.$store.state.haveSenttableData = res.data // 已派订单列表数据
-          }
+        
         })
     }
 },

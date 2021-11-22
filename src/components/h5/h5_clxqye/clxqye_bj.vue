@@ -101,7 +101,6 @@ methods: {
       //查询当前车辆
       let id = this.$route.query.id;
      api_selectdqcl({id: id }).then((res) => {
-          if (res.code == 200) {
             if(res.data.result.zt == '5'){
                 res.data.result.zt = '出勤'
               }else if(res.data.result.zt == '6'){
@@ -110,7 +109,6 @@ methods: {
                   res.data.result.zt = '待勤中(可拼车)'
               }
             this.mydate = res.data.result;
-          }
         });
     },
     onSubmit(values) {
@@ -133,10 +131,7 @@ methods: {
           cph: cph,
           id: id
       }).then((res) => {
-          if (res.code == 200) {
             Notify({ type: 'success', message: '修改成功' });
-            this.onClickLeft();
-          }
         })
     }
   },

@@ -47,8 +47,8 @@
            <el-select v-model="iddate.cfd" placeholder="请选择/输入出发地" filterable @blur="selectBlurcfd" :style="{width:'100%'}">
                 <el-option
                 v-for="item in options"
-                :key="item.value"
-                :value="item.value">
+                :key="item.name"
+                :value="item.name">
                 </el-option>
             </el-select>
               </el-col>
@@ -63,8 +63,8 @@
           <el-select v-model="iddate.mdd" placeholder="请选择/输入目的地" filterable @blur="selectBlurmdd" :style="{width:'100%'}">
                 <el-option
                 v-for="item in options"
-                :key="item.value"
-                :value="item.value">
+                :key="item.name"
+                :value="item.name">
                 </el-option>
             </el-select>
             </el-col>
@@ -205,17 +205,7 @@ return {
         {value:'否'}
       ],
        ryslarr:[],
-    options: [   //出发地和目的的
-        {  value: '吉祥路',  }, 
-        {  value: '豪贤路', },
-        {  value: '市府', }, 
-        {  value: '环市路468大院', },
-        {  value: '体育东省厅'},
-        {  value: ' 白云分院(白云大道)'},
-        {  value: '天河分院'},
-        {  value: '番禺分院'},
-        {  value: '南沙分院'}
-    ],
+    options: require('../../../start/json/actions.json')
 };
 },
 //监听属性 类似于data概念
@@ -247,7 +237,6 @@ cancel(){  //取消
         ycrxm: this.iddate.ycrxm,
         userid:this.iddate.ycruserid,
       }).then((res) => {
-        if (res.code == 200) {
         this.$message({
             message: "发送成功，订单已经到已派车列表",
             type: "success",
@@ -255,7 +244,6 @@ cancel(){  //取消
          this.cancel();
          api_ypdFindAll({});
          api_count({});
-        }
       });
   },
    getRowKeys(row) {
@@ -276,10 +264,8 @@ cancel(){  //取消
     },
       parentHandleclick(row){ 
             api_idFindAll({ id: row.id }).then((res) => {
-                        if (res.code == 200) {
                         this.iddate = res.data[0];
                          this.iddate.ry = this.iddate.ry.split(',');
-                        }
                     });
         this.centerDialogVisible = true;
     },

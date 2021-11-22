@@ -13,16 +13,16 @@
               </el-form-item>
               <el-form-item label="验证码"   prop="yzm">
                  <el-col :span="12">
-                    <el-input type="yzm" v-model="fromdata.yzm" ></el-input>
+                    <el-input type="yzm" v-model="fromdata.yzm" @keyup.enter.native="submitForm('ruleForm')"></el-input>
                  </el-col>
                  <el-col :span="12">
 
-                <canvas id="canvas" @click="getrenovate" width="100" height="30"></canvas>
+                <canvas id="canvas" @click="getrenovate" width="100" height="30"  ></canvas>
                  </el-col>
                 
               </el-form-item>
               <el-form-item>
-                <el-button icon="el-icon-upload" type="primary" @click="submitForm('ruleForm')">提交</el-button>
+                <el-button icon="el-icon-upload" type="primary" @click="submitForm('ruleForm')" >提交</el-button>
               </el-form-item>
       </el-form>
      </el-row>

@@ -90,9 +90,9 @@ methods: {
           cph: this.from.cph,
           zt: '已发送/待处理'
       }).then((res) => {
-          if (res.code == 200) {
+          
              this.$store.state.DidtableData = res.data // 待派订单列表数据
-          }
+         
         })
     },
      selectBlurcfd(e){  //出发地

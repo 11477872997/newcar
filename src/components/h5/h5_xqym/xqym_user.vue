@@ -12,7 +12,7 @@
         <van-field v-model="item.ycrs" label="人数" left-icon="smile-o" readonly />
       </van-row>
       <van-row type="flex" justify="center" class="box-border">
-        <van-field v-model="item.cfd" label="出的地" left-icon="smile-o" readonly />
+        <van-field v-model="item.cfd" label="出发地" left-icon="smile-o" readonly />
       </van-row>
       <van-row type="flex" justify="center" class="box-border" >
         <van-field v-model="item.mdd" label="目的地" left-icon="smile-o" readonly />
@@ -58,9 +58,7 @@ created() {
    api_idFindAll({
           id: this.$parent.$route.query.id,
         }).then((res) => {
-          if (res.code == 200) {
             this.mydate = res.data;
-          }
     });
 },
 //生命周期 - 挂载完成（可以访问DOM元素）

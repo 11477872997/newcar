@@ -61,14 +61,13 @@ onSubmit(){  //查询
         zt: this.form.zt,
         sj: this.form.sj
     }).then((res) => {
-            if (res.code == 200) {
-                if(res.data.status == 0){
-                     this.$message({ message: "查询无结果",ype: "success",});
-                      this.$store.state.tableData = [] //车辆管理查询表格数据
-                }else{
-                    this.$store.state.tableData = res.data //车辆管理查询表格数据
-                }
-            }
+            
+        if(res.data.status == 0){
+              this.$message({ message: "查询无结果",ype: "success",});
+              this.$store.state.tableData = [] //车辆管理查询表格数据
+        }else{
+            this.$store.state.tableData = res.data //车辆管理查询表格数据
+        }
     }).catch((error) => {
         this.$message.error("查询失败");
     });

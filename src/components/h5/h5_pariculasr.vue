@@ -134,13 +134,12 @@ export default {
       });
     },
     mydaeFN() {
+      console.log(this.objname)
     //   管理员
     // 未派订单列表数据
     if(this.objname.zt == 3 && this.objname.name == 'wp' && this.objname.qx == 'admin'){
          dpdFindAll({}).then((res) => {
-          if (res.code == 200) {
             this.mydae = res.data;
-          }
         });
         return false;
     }
@@ -148,9 +147,8 @@ export default {
     // 未派订单列表数据
     if(this.objname.zt == 3 && this.objname.name == 'wp' && this.objname.qx == 'user'){
          api_ycrxmFindAll({ycrxm:this.$store.state.username,zt:"3"}).then((res) => {
-          if (res.code == 200) {
             this.mydae = res.data;
-          }
+          
         });
         return false;
     }
@@ -158,9 +156,7 @@ export default {
     // 已派订单列表数据
     if(this.objname.zt == 4 && this.objname.name == 'yp' && this.objname.qx == 'admin'){
          ypdFindAll({}).then((res) => {
-          if (res.code == 200) {
             this.mydae = res.data;
-          }
         });
         return false;
     }
@@ -168,9 +164,7 @@ export default {
     // 已派订单列表数据
     if(this.objname.zt == 4 && this.objname.name == 'yp' && this.objname.qx == 'user'){
          api_ycrxmFindAll({ycrxm:this.$store.state.username,zt:"4"}).then((res) => {
-          if (res.code == 200) {
             this.mydae = res.data;
-          }
         });
         return false;
     }

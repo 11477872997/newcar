@@ -1,4 +1,26 @@
 import axios from 'axios'   //安装axios并引入
+import { Loading } from 'element-ui';
+// 加载中
+function loading(){
+  var options = {
+    lock: true,
+    text: 'Loading',
+    spinner: 'el-icon-loading',
+    background: 'rgba(0, 0, 0, 0.7)'
+  }
+  Loading.service(options);
+}
+// 关闭
+function enloading(){
+  var options = {
+    lock: true,
+    text: 'Loading',
+    spinner: 'el-icon-loading',
+    background: 'rgba(0, 0, 0, 0.7)'
+  }
+
+  Loading.service(options).close();
+}
 const autograph = function auths (url, query) {
   var headers = {
     'Content-Type': 'application/json;charset=UTF-8'
@@ -21,8 +43,10 @@ baseURL:url,
   timeout: 15000
 })
 
+
 // request 拦截器,这些直接复制粘贴,都是死的代码,若想更丰富,懂了之后可以添加更多的精彩
 service.interceptors.request.use(function(config) {
+  loading();
   const data = autograph(config.url, config.data)
   
   if (config.method === 'get') {
@@ -38,10 +62,11 @@ service.interceptors.request.use(function(config) {
   Promise.reject(error)
 })
 
+// 响应后的拦截
 // response 拦截器   异常处理
 service.interceptors.response.use(
   response => {
-// console.log(response)
+    enloading();
         return {
             code: response.status,
             message: response.statusText,

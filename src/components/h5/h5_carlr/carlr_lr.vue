@@ -69,7 +69,6 @@ methods: {
           cph: values.cph.trim(),
           sj: values.sj.trim()
           }).then((res) => {
-        if (res.code == 200) {
           let data = res.data
           if(data == '已有该车辆'){
             Notify({ type: 'success', message:data});
@@ -77,7 +76,6 @@ methods: {
             Notify({ type: 'success', message:data});
               this.$router.go(-1);
           }
-        }
       }).catch((error) => {
             Notify({ type: 'danger', message:data});
         });

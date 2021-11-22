@@ -87,10 +87,8 @@ methods: {
           //删除订单
             api_deletes({cph: id })
               .then((res) => {
-                if (res.code == 200) {
                 Notify({ type: 'success', message: '删除成功' });
                   this.goapi();
-                }
               })
         })
         .catch(() => {

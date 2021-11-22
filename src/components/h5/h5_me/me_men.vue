@@ -8,7 +8,7 @@
         <van-notice-bar
           left-icon="volume-o"
           scrollable 
-          text="默认按钮状态为红色为“出勤”,点击按钮变为绿色为“待勤”，如果按钮变为蓝色请找管理员处理。"
+          text="默认按钮状态为红色为“出勤”,点击按钮变为绿色为“待勤”。"
         />
         <van-button style="margin:15px" :type=typename @click="xgzt()">{{namezt}}</van-button>
       </div>
@@ -76,7 +76,7 @@ methods: {
                  this.namezt = '出勤';
                }else{
                   this.typename = 'info';
-                   this.namezt = '状态不确定';
+                   this.namezt = '可拼车';
                }
               });
             // this.mydata = require('../../../start/json/h5_dirver.json');
@@ -121,12 +121,9 @@ methods: {
           cph: this.sjdata.cph,
           id: this.sjdata.id
         }).then((res) => {
-          
-            if (res.code == 200) {
               Notify({ type: 'success', message: '修改成功' });
               this.namezt = '待勤'
               this.typename = 'primary';
-            }
           })
         })
         .catch(() => {

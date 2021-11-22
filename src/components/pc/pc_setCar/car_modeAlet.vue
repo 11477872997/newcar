@@ -73,9 +73,7 @@ watch: {},
 methods: {
   parentHandleclick(row){   //编辑当前车辆
        api_selectdqcl({ id: row.id }).then((res) => {
-        if (res.code == 200) {
           this.iddate = res.data.result;
-        }
       });
       this.centerDialogVisible = true;
   },
@@ -90,14 +88,13 @@ methods: {
         id: this.iddate.id,
         zt: this.iddate.zt.trim(),
       }).then((res) => {
-        if (res.code == 200) {
+       
            this.$message({
                     message: '保存成功',
                     type: 'success'
         });
           this.cancel();
           api_pccxsyFindAll({});
-        }
     }).catch((error)=>{
        this.$message.error("保存失败");
     })
