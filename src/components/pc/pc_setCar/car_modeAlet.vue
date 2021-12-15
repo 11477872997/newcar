@@ -23,6 +23,13 @@
       </el-row>
       <el-row class="mT">
         <el-col :span="24">
+          <el-input v-model="iddate.dhhm">
+            <template slot="prepend">电话号码&emsp;</template>
+          </el-input>
+        </el-col>
+      </el-row>
+      <el-row class="mT">
+        <el-col :span="24">
           <el-input v-model="iddate.sj">
             <template slot="prepend">司&emsp;&emsp;机</template>
           </el-input>
@@ -87,6 +94,7 @@ methods: {
         sj: this.iddate.sj.trim(),
         id: this.iddate.id,
         zt: this.iddate.zt.trim(),
+        dhhm: this.iddate.dhhm.trim(),
       }).then((res) => {
        
            this.$message({

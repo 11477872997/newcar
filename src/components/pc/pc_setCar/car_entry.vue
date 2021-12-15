@@ -18,6 +18,13 @@
           </el-input>
         </el-col>
       </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-input v-model="from.dhhm">
+            <template slot="prepend">电话号码</template>
+          </el-input>
+        </el-col>
+      </el-row>
       <span slot="footer" class="dialog-footer">
         <el-button @click="cancel">取 消</el-button>
         <el-button type="primary" @click="entry">录入</el-button>
@@ -40,7 +47,8 @@ return {
   centerLR: false,
   from:{
       cph:'',
-      sj:''
+      sj:'',
+      dhhm:''
   }
 };
 },
@@ -54,10 +62,22 @@ methods: {
       //添加
       this.centerLR = true;
     }, 
-    entry(){   //录入
+    entry(){   
+         if(this.from.cph == ''){
+              this.$message.error('车牌号不能空' );
+            return false
+          }else if(this.from.sj == ''){
+              this.$message.error('司机不能空' );
+            return false
+          }else if(this.from.dhhm == ''){
+              this.$message.error('电话不能空' );
+            return false
+          } 
+      //录入
         api_pcinsert({ 
             cph:this.from.cph.trim(), 
-            sj:this.from.sj.trim() 
+            sj:this.from.sj.trim(),
+            dhhm:this.from.dhhm.trim() 
             }).then((res) => {
                 this.$message({
                     message: "录入成功",

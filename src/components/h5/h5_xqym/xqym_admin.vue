@@ -115,6 +115,7 @@
                 <van-picker
                   show-toolbar
                   :columns="SJXM"
+                  :allow-html='true'
                   @confirm="onConfirm3"
                   @cancel="showPicker3 = false"
                 />
@@ -201,7 +202,7 @@ methods: {
   onConfirm5(value,index) {
       //司机
        this.mydate[0].sfdd = value;
-    //  console.log(index)
+    
      this.showPicker5 = false;
     },
    rytj(){
@@ -275,9 +276,10 @@ methods: {
     },
     onConfirm3(value) {
       //司机
-      this.sj = value.substring(0,3);
+      this.sj = value.substring(value.indexOf('>')+1,value.indexOf('('));
+      // console.log(this.sj)
       for (let key of this.options) {
-        if (value.substring(0,3) == key.sj) {
+        if ( this.sj == key.sj) {
           this.cph = key.cph;
         }
       }
@@ -286,24 +288,30 @@ methods: {
     AndSJXM() {
       //查询司机和车牌号
       getCPHAndSJXM({}).then((res) => {
-        //   console.log(res.data)
           for (let key of res.data) {
-            this.SJXM.push(key.sj+"("+key.zt+")");
+            // this.SJXM.push(key.sj+"("+key.zt+")");
+           var ddxx =  key.ddxx == undefined ?"无": key.ddxx;
+            this.SJXM.push ("<p style='text-align:center;'>"+key.sj+"("+key.zt+")</p><p style='color: red;'>"+ddxx+"</p>")
           }
           this.options = res.data;
+          //  console.log(res.data)
+          //  console.log(this.SJXM)
       });
     },
     onSubmit(values) {
-        // console.log(values)
+     function getCookie(name) {  //获取cookie
+      var arr,
+            reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+          if ((arr = document.cookie.match(reg))) return unescape(arr[2]);
+          else return null;
+      }
+      
         if(values.cph == '' || values.sj == ''){
              Notify({ type: "danger", message: "司机和车牌号不能为空" });
             return false;
         }
       //发送
-      console.log(this.mydate)
-      // console.log(this.mydate.ycrxm)
-      // return
-      // console.log(values)
+     
       //修改订单
       api_pcdUpdate({
         id: values.id,
@@ -321,10 +329,15 @@ methods: {
         sj: values.sj.substring(0,3),
       }).then((res) => {
           Notify({ type: "success", message: "处理成功" });
-          this.$router.go(-2);
+          if(getCookie('userid') == undefined){
+              this.$router.go(-2);
+             return false;
+          }
+           this.$router.push({path:'/h5_me'});
+           
       });
     },
-     convertKey (arr, key) {
+ convertKey (arr, key) {
     let newArr = [];
     arr.forEach((item, index) => {
       let newObj = {};

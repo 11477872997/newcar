@@ -20,6 +20,9 @@
             :desc="('司机 : '+item.sj) "
             :thumb="picUrlOff"
           >
+           <template #tags v-if="item.ddxx">
+            <p style="color:red">最新订单: {{item.ddxx}}</p>
+        </template>
             <template #footer>
               <van-button size="normal"  type="info"  @click="xqyem(item.id)">修改状态</van-button>
               <van-button size="normal"  type="info" @click="SCDD(item.cph)">删除</van-button>
@@ -38,6 +41,9 @@
             :desc="('司机 : '+item.sj) "
             :thumb="picUrlOff"
           >
+          <template #tags v-if="item.ddxx">
+            <p style="color:red">最新订单: {{item.ddxx}}</p>
+        </template>
             <template #footer>
               <van-button size="normal"  type="info" @click="xqyem(item.id)">修改状态</van-button>
               <van-button size="normal"  type="info" @click="SCDD(item.cph)">删除</van-button>
@@ -103,10 +109,10 @@ methods: {
       let search = this.value;
       this.list = this.clzt.filter(function (product) {
         // 每一项数据
-        // console.log(product)
+     
         return Object.keys(product).some(function (key) {
           //   // 每一项数据的参数名
-          // console.log(key)
+          
           return (
             String(product[key])
               // toLowerCase() 方法用于把字符串转换为小写。

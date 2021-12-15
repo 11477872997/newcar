@@ -73,13 +73,13 @@ export default {
       this.activeIndex = this.$route.path; // 通过他就可以监听到当前路由状态并激活当前菜单
     },
     handleOpen(key, keyPath) {
-      // console.log(key, keyPath);
+      
     },
     handleClose(key, keyPath) {
-      // console.log(key, keyPath);
+      
     },
     indexText(index, path, text) {
-      // console.log(index);
+     
       
     },
   },

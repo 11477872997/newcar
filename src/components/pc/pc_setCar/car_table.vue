@@ -22,6 +22,7 @@
           </el-table-column>
           <el-table-column prop="cph" label="车牌号" align="center"></el-table-column>
           <el-table-column prop="sj" label="司机" align="center"></el-table-column>
+          <el-table-column prop="dhhm" label="电话号码" align="center"></el-table-column>
           <el-table-column label="操作" width="120">
             <template slot-scope="scope">
               <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
@@ -84,11 +85,11 @@ methods: {
       return row.e;
     },
      handleSizeChange(val) {
-      // console.log(`每页 ${val} 条`);
+      
       this.pagesize = val;
     },
     handleCurrentChange(val) {
-      // console.log(`当前页: ${val}`);
+      
       this.currentPage = val;
     },
     deletes(row){   //删除当前车辆

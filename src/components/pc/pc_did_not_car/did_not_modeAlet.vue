@@ -159,7 +159,7 @@
           </el-table-column>
           <el-table-column prop="sj" label="司机" align="center"></el-table-column>
           <el-table-column prop="cph" label="车牌号" align="center"></el-table-column>
-          <el-table-column prop="mdd" label="目的地" align="center"></el-table-column>
+          <el-table-column prop="ddxx" label="最新订单" align="center"></el-table-column>
         </el-table>
       </el-col>
     </el-row>
@@ -224,17 +224,17 @@ methods: {
       return row.e;
     },
      handleSizeChange(val) {
-      // console.log(`每页 ${val} 条`);
+   
       this.pagesize = val;
     },
     handleCurrentChange(val) {
-      // console.log(`当前页: ${val}`);
+      
       this.currentPage = val;
     },
     parentHandleclick(row){ 
             api_idFindAll({ id: row.id }).then((res) => {
                 this.iddate = res.data[0];
-                // console.log(this.iddate)
+               
                 this.iddate.ry = this.iddate.ry.split(',');
             });
         this.centerDialogVisible = true;
@@ -251,7 +251,7 @@ methods: {
   },
   conserve(id){  //保存
     //保存
-    //  console.log(this.iddate.sfdd)
+  
      if(this.iddate.sfdd ==  undefined){
          this.$message.error("请选择是否等待");
            return false
@@ -261,7 +261,8 @@ methods: {
            return false
       }
    
-      // console.log(this.iddate.sfdd)
+    
+      
     api_pcdUpdate({
         id: id,
         ycsj: this.iddate.ycsj,
@@ -301,7 +302,7 @@ methods: {
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
  api_getAllUser().then((res) =>{
-    // console.log(res)
+ 
     this.ryslarr = res.data;
   })
 },

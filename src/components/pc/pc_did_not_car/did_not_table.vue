@@ -78,11 +78,11 @@ methods: {
       return row.e;
     },
      handleSizeChange(val) {
-      // console.log(`每页 ${val} 条`);
+      
       this.pagesize = val;
     },
     handleCurrentChange(val) {
-      // console.log(`当前页: ${val}`);
+     
       this.currentPage = val;
     },
      handleClick(row) {   //编辑当前待派车订单

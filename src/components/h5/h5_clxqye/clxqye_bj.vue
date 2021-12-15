@@ -35,6 +35,15 @@
               
             />
             <van-field
+              v-model="mydate.dhhm"
+              clearable
+              label="电话号码"
+              name="dhhm"
+              left-icon="manager-o"
+              placeholder="电话号码"
+              
+            />
+            <van-field
               v-model="mydate.sj"
               clearable
               label="司机"
@@ -101,6 +110,7 @@ methods: {
       //查询当前车辆
       let id = this.$route.query.id;
      api_selectdqcl({id: id }).then((res) => {
+        
             if(res.data.result.zt == '5'){
                 res.data.result.zt = '出勤'
               }else if(res.data.result.zt == '6'){
@@ -123,14 +133,17 @@ methods: {
       }
       let sj = values.sj.trim();
       let cph = values.cph.trim();
+      let dhhm = values.dhhm.trim();
       let id =  this.mydate.id;
       //选染
       api_clxxUpdate({
           zt: zt,
           sj: sj,
           cph: cph,
+          dhhm:dhhm,
           id: id
       }).then((res) => {
+        this.$router.go(-1)
             Notify({ type: 'success', message: '修改成功' });
         })
     }

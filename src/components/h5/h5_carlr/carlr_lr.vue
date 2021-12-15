@@ -14,6 +14,14 @@
             placeholder="车牌号"
           />
           <van-field
+            v-model="from.dhhm"
+            clearable
+            label="电话号码"
+            name="dhhm"
+            left-icon="location-o"
+            placeholder="电话号码"
+          />
+          <van-field
             v-model="from.sj"
             clearable
             label="司机"
@@ -48,6 +56,7 @@ return {
     from:{
          cph: "",
          sj: "",
+         dhhm:''
     }
 };
 },
@@ -64,10 +73,14 @@ methods: {
       }else if(values.sj == ''){
         Notify({ type: 'danger', message: '司机不能空' });
          return false
+      }else if(values.dhhm == ''){
+        Notify({ type: 'danger', message: '电话不能空' });
+         return false
       }
      api_pcinsert({
           cph: values.cph.trim(),
-          sj: values.sj.trim()
+          sj: values.sj.trim(),
+          dhhm: values.dhhm.trim(),
           }).then((res) => {
           let data = res.data
           if(data == '已有该车辆'){

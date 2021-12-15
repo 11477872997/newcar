@@ -97,11 +97,11 @@ methods: {
       this.dataListSelections = val;
     },
     handleSizeChange(val) {
-      // console.log(`每页 ${val} 条`);
+      
       this.pagesize = val;
     },
     handleCurrentChange(val) {
-      // console.log(`当前页: ${val}`);
+      
       this.currentPage = val;
     },
       handleClick(row) {   //编辑当前待派车订单
@@ -113,7 +113,7 @@ methods: {
        dcExcle() {
       //导出数据
       let jsonData = this.dataListSelections;
-      // console.log(jsonData);
+      
       if (jsonData == undefined || jsonData.length <= 0) {
         this.$message.error("请勾选数据");
         return false;

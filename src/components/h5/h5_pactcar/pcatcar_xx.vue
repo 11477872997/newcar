@@ -173,7 +173,7 @@ methods: {
   onConfirm3(value,index) {
       //司机
      this.from.sfdd = value;
-    //  console.log(index)
+    
      this.showPicker3 = false;
     },
     hadelType(){
@@ -187,8 +187,7 @@ methods: {
         this.arrname.push(item.name)
       }
       this.from.ry = this.arrname.toString();
-      // this. from. ycrs = this.arrname.length;
-      // console.log( this.arrname.length)
+    
        this.rysl = false;
     },
     onSelect(item){ //出发地

@@ -157,7 +157,7 @@ methods: {
         ycrxm: ycrxm,
         userid: sessionStorage.getItem('userid'),
       }).then((res) => {
-        // console.log(res)
+        
            this.$message({
             message: "约车成功",
             type: "success",
@@ -202,7 +202,7 @@ created() {
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
  api_getAllUser().then((res) =>{
-    // console.log(res)
+    
     this.ryslarr = res.data;
   })
   //获取当前时间

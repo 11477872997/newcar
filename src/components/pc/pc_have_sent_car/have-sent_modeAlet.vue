@@ -160,7 +160,7 @@
           </el-table-column>
           <el-table-column prop="sj" label="司机" align="center"></el-table-column>
           <el-table-column prop="cph" label="车牌号" align="center"></el-table-column>
-          <el-table-column prop="mdd" label="目的地" align="center"></el-table-column>
+          <el-table-column prop="ddxx" label="目的地" align="center"></el-table-column>
         </el-table>
       </el-col>
     </el-row>
@@ -255,11 +255,11 @@ cancel(){  //取消
       this.dataListSelections = val;
     },
     handleSizeChange(val) {
-      // console.log(`每页 ${val} 条`);
+     
       this.pagesize = val;
     },
     handleCurrentChange(val) {
-      // console.log(`当前页: ${val}`);
+     
       this.currentPage = val;
     },
       parentHandleclick(row){ 
@@ -286,7 +286,7 @@ cancel(){  //取消
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
  api_getAllUser().then((res) =>{
-    // console.log(res)
+  
     this.ryslarr = res.data;
   })
 },

@@ -45,7 +45,7 @@ created() {
     if(query.id !== undefined){
         api_getUser({
                 id:query.id,
-                type:query.type
+                // type:query.type
             }).then( (res)=>{
                 sessionStorage.setItem('per',res.data.per);
                 sessionStorage.setItem("userid", res.data.userid);  //权限

@@ -35,7 +35,19 @@ watch: {},
 //方法集合
 methods: {
   onClickLeft() {
-      this.$router.go(-1);
+     function getCookie(name) {  //获取cookie
+      var arr,
+            reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+          if ((arr = document.cookie.match(reg))) return unescape(arr[2]);
+          else return null;
+      }
+     if(getCookie('userid') == null){
+             this.$router.go(-1);
+             return false;
+          }
+       this.$router.push({path:'/h5_me',query: { id:sessionStorage.getItem('userid')}});
+      //  this.$router.push({path:'/h5_me'});
+     
     },
 },
 //生命周期 - 创建完成（可以访问当前this实例）

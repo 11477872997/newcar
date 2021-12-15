@@ -44,7 +44,7 @@ watch: {},
 methods: {
    getmen(){
         let per =  sessionStorage.getItem('per');
-        console.log(per)
+      
           if(per == 'admin'){
             this.mydata = require('../../../start/json/h5_admin.json');
             count({}).then((res)=>{
@@ -67,7 +67,7 @@ methods: {
             this.falg = true;
              api_selectdqcl({id:sessionStorage.getItem('userid') }).then((res) => {
                this.sjdata = res.data.result;
-               console.log(res)
+              
                if(res.data.result.zt == '6'){
                  this.typename = 'primary';
                   this.namezt = '待勤';
@@ -116,10 +116,11 @@ methods: {
         message: "您确定呀修改为待勤吗？",
       }) .then(() => {
             api_clxxUpdate({
-          zt: '6',
-          sj: this.sjdata.sj,
-          cph: this.sjdata.cph,
-          id: this.sjdata.id
+              zt: '6',
+              sj: this.sjdata.sj,
+              cph: this.sjdata.cph,
+              dhhm: this.sjdata.dhhm,
+              id: this.sjdata.id
         }).then((res) => {
               Notify({ type: 'success', message: '修改成功' });
               this.namezt = '待勤'

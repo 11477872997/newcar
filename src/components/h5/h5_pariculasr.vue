@@ -24,6 +24,7 @@
               <van-tag plain type="danger">订单时间 : {{item.ycsj}}</van-tag>
             </template>
             <template #footer>
+              <van-button size="normal"  type="info"  @click="cdgl">车辆管理</van-button>
               <van-button size="normal"  type="info"  @click="xqyem(item.id)">详情</van-button>
               <van-button  size="normal"  type="info"  @click="qxdd(item.id)">取消订单</van-button>
             </template>
@@ -45,6 +46,7 @@
               <van-tag plain type="danger">订单时间 : {{item.ycsj}}</van-tag>
             </template>
             <template #footer>
+              <van-button size="normal"  type="info"  @click="cdgl" v-if="flagd">车辆管理</van-button>
               <van-button size="normal"  type="info" @click="xqyem(item.id)">详情</van-button>
               <van-button size="normal"  type="info" @click="qxdd(item.id)" >取消订单</van-button>
             </template>
@@ -73,6 +75,7 @@ export default {
     return {
       value: "",
       un:'',
+      flagd:false,
        flag:"",//权限变量
       picUrlOff: require("../../assets/car.jpg"),
       // 搜索后的展示数据
@@ -83,6 +86,10 @@ export default {
   },
   //方法集合
   methods: {
+    cdgl(){
+      //车辆管理
+       this.$router.push({ path: "/h5_setcar",}); ///跳转详细页面
+    },
     xqyem(id) {
       let qx = this.objname.qx 
       let zt = this.objname.zt;
@@ -99,7 +106,6 @@ export default {
             zt:'2',
             ycid:id
           }).then((res)=>{
-            console.log(res)
             if(res.data == true){
               Notify({ type: 'success', message: '取消成功' });
               this.$router.go(-1);
@@ -119,10 +125,10 @@ export default {
       let search = this.value;
       this.list = this.mydae.filter(function (product) {
         // 每一项数据
-        // console.log(product)
+       
         return Object.keys(product).some(function (key) {
           //   // 每一项数据的参数名
-          // console.log(key)
+          
           return (
             String(product[key])
               // toLowerCase() 方法用于把字符串转换为小写。
@@ -134,12 +140,13 @@ export default {
       });
     },
     mydaeFN() {
-      console.log(this.objname)
+      
     //   管理员
     // 未派订单列表数据
     if(this.objname.zt == 3 && this.objname.name == 'wp' && this.objname.qx == 'admin'){
          dpdFindAll({}).then((res) => {
             this.mydae = res.data;
+             this.flagd = true;
         });
         return false;
     }
@@ -148,7 +155,7 @@ export default {
     if(this.objname.zt == 3 && this.objname.name == 'wp' && this.objname.qx == 'user'){
          api_ycrxmFindAll({ycrxm:this.$store.state.username,zt:"3"}).then((res) => {
             this.mydae = res.data;
-          
+             this.flagd = false;
         });
         return false;
     }
@@ -157,6 +164,7 @@ export default {
     if(this.objname.zt == 4 && this.objname.name == 'yp' && this.objname.qx == 'admin'){
          ypdFindAll({}).then((res) => {
             this.mydae = res.data;
+             this.flagd = true;
         });
         return false;
     }
@@ -165,6 +173,7 @@ export default {
     if(this.objname.zt == 4 && this.objname.name == 'yp' && this.objname.qx == 'user'){
          api_ycrxmFindAll({ycrxm:this.$store.state.username,zt:"4"}).then((res) => {
             this.mydae = res.data;
+            this.flagd = false;
         });
         return false;
     }

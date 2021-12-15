@@ -34,7 +34,7 @@ watch: {
     "$route.path": {
       handler(val) {
         //刷新页面定位当前高亮
-        // console.log(val)
+     
         this.active = val;
       },
       immediate: true, //立即执行
@@ -44,7 +44,7 @@ watch: {
 methods: {
   getmen(){
     let per = sessionStorage.getItem('per');
-     console.log(per+'-----men')
+    
       if(per == 'admin'){
         this.mydata = require('../../../start/json/h5_men.json')
         return false;

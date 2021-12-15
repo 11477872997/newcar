@@ -24,6 +24,9 @@
         <van-field v-model="item.cph" label="车牌号" left-icon="smile-o" readonly />
       </van-row>
       <van-row type="flex" justify="center" class="box-border">
+        <van-field v-model="item.sfdd" label="是否等待" left-icon="smile-o" readonly />
+      </van-row>
+      <van-row type="flex" justify="center" class="box-border">
         <van-field v-model="item.bz" label="备注" left-icon="smile-o" readonly />
       </van-row>
     </div>

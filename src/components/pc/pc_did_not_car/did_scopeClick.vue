@@ -66,7 +66,7 @@ watch: {},
 //方法集合
 methods: {
 parentHandleclick(row){
-    // console.log(row)
+    
     this.row = row;
     this.dialogVisible = true;
 }
