@@ -19,6 +19,13 @@
         "badge":"",
         "icon":"description",
         "to":"/h5_yp"
+    },
+    {
+        "id": "3",
+        "text": "车辆状态",
+        "badge":"",
+        "icon":"records",
+        "to":"/h5_carzt"
     }
 
     

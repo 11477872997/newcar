@@ -17,6 +17,7 @@
             <template slot-scope="scope">
                     <span v-if="scope.row.zt=== '出勤'" :style="{color:'#F56C6C',cursor:'pointer'}" @click="mddClick(scope.row.id)" >出勤</span>
                     <span v-else-if="scope.row.zt=== '待勤'" :style="{color:'#67C23A'}">待勤</span>
+                    <span v-else-if="scope.row.zt=== '休假'" :style="{color:'#00000'}">休假</span>
                     <span v-else  :style="{color:'#409EFF'}">待勤中(可拼车)</span>
              </template>
           </el-table-column>

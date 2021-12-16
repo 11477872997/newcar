@@ -33,5 +33,12 @@
         "badge":"",
         "icon":"edit",
         "to":"/h5_carlr"
+    },
+    {
+        "id": "5",
+        "text": "车辆状态",
+        "badge":"",
+        "icon":"records",
+        "to":"/h5_carzt"
     }
 ]

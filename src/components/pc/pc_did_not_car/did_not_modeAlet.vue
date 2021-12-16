@@ -19,7 +19,23 @@
            </el-col>
         </el-col>
       </el-row>
-
+     <el-row class="mT">
+        <el-col :span="24">
+          <el-col :span="7" class="el-seleect-letf">
+           预计有车时间
+         </el-col>
+          <el-col :span="17">
+          <el-date-picker
+            :style="{width:'100%'}"
+            v-model="iddate.yjycsj"
+            type="datetime"
+            format="yyyy-MM-DD HH:mm"
+            value-format="yyyy-MM-DD HH:mm"
+            placeholder="选择日期时间"
+          ></el-date-picker>
+           </el-col>
+        </el-col>
+      </el-row>
       <el-row class="mT">
         <el-col :span="24">
           <el-col :span="7" class="el-seleect-letf">
@@ -269,6 +285,7 @@ methods: {
         ycrs: this.iddate.ycrs,
         cfd: this.iddate.cfd,
         mdd: this.iddate.mdd,
+        yjycsj: this.iddate.yjycsj,
         zt: "4",
         bz: this.iddate.bz,
         ry: this.iddate.ry.toString(),

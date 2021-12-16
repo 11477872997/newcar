@@ -116,7 +116,7 @@ const router = new Router({
                     component: () => import('../views/h5/h5_home'),
                     meta: {
                         title: '首页',
-                        roles: ['admin', 'user', 'SJ']
+                        roles: ['admin']
                     },
                 },
                 {   //我的
@@ -136,7 +136,7 @@ const router = new Router({
             component: () => import('../views/h5/h5_pactcar'),
             meta: {
                 title: '约车',
-                roles: ['admin', 'user', 'SJ']
+                roles: ['admin', 'user']
             },
         },
         {   //h5车辆录入
@@ -172,7 +172,7 @@ const router = new Router({
             component: () => import('../views/h5/h5_wp'),
             meta: {
                 title: '未派订单',
-                roles: ['admin', 'user', 'SJ']
+                roles: ['admin', 'user']
             },
         },
         {   //h5已派订单
@@ -181,7 +181,16 @@ const router = new Router({
             component: () => import('../views/h5/h5_yp'),
             meta: {
                 title: '已派订单',
-                roles: ['admin', 'user', 'SJ']
+                roles: ['admin', 'user']
+            },
+        },
+        {   //h5车辆状态
+            path: '/h5_carzt',
+            name: "h5_carzt",
+            component: () => import('../views/h5/h5_carzt'),
+            meta: {
+                title: '车辆状态',
+                roles: ['admin', 'user']
             },
         },
         {   // 公共详情

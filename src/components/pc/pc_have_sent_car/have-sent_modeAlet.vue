@@ -2,7 +2,7 @@
 <template>
 <div class='have-sent_modeAlet'>
  <el-dialog title="提示" :visible.sync="centerDialogVisible" width="35%" center>
-            <el-row class="mT">
+      <el-row class="mT">
         <el-col :span="24">
           <el-col :span="7" class="el-seleect-letf">
            请选择时间
@@ -11,6 +11,23 @@
           <el-date-picker
             :style="{width:'100%'}"
             v-model="iddate.ycsj"
+            type="datetime"
+            format="yyyy-MM-DD HH:mm"
+            value-format="yyyy-MM-DD HH:mm"
+            placeholder="选择日期时间"
+          ></el-date-picker>
+           </el-col>
+        </el-col>
+      </el-row>
+      <el-row class="mT">
+        <el-col :span="24">
+          <el-col :span="7" class="el-seleect-letf">
+           预计有车时间
+         </el-col>
+          <el-col :span="17">
+          <el-date-picker
+            :style="{width:'100%'}"
+            v-model="iddate.yjycsj"
             type="datetime"
             format="yyyy-MM-DD HH:mm"
             value-format="yyyy-MM-DD HH:mm"
@@ -155,6 +172,7 @@
             <template slot-scope="scope">
                     <span v-if="scope.row.zt=== '出勤'" :style="{color:'#F56C6C'}" >出勤</span>
                     <span v-else-if="scope.row.zt=== '待勤'" :style="{color:'#67C23A'}">待勤</span>
+                    <span v-else-if="scope.row.zt=== '休假'" :style="{color:'#00000'}">休假</span>
                     <span v-else  :style="{color:'#409EFF'}">待勤中(可拼车)</span>
              </template>
           </el-table-column>
@@ -228,6 +246,7 @@ cancel(){  //取消
         ycrs: this.iddate.ycrs,
         cfd: this.iddate.cfd,
         mdd: this.iddate.mdd,
+        yjycsj: this.iddate.yjycsj,
         zt: "4",
         sfdd: this.iddate.sfdd,
         bz: this.iddate.bz,

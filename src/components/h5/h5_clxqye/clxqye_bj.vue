@@ -86,7 +86,7 @@ data() {
 //这里存放数据
 return {
       mydate: [],
-      sjs: ["出勤", "待勤", "待勤中(可拼车)"],
+      sjs: ["出勤", "待勤", "待勤中(可拼车)","休假"],
       sj: "",
       showPicker3: false,
 };
@@ -110,13 +110,15 @@ methods: {
       //查询当前车辆
       let id = this.$route.query.id;
      api_selectdqcl({id: id }).then((res) => {
-        
+            
             if(res.data.result.zt == '5'){
                 res.data.result.zt = '出勤'
               }else if(res.data.result.zt == '6'){
                  res.data.result.zt = '待勤'
               }else if(res.data.result.zt == '7'){
                   res.data.result.zt = '待勤中(可拼车)'
+              }else if(res.data.result.zt == '8'){
+                  res.data.result.zt = '休假'
               }
             this.mydate = res.data.result;
         });
@@ -130,6 +132,8 @@ methods: {
           zt = '6'
       }else if(values.zt == '待勤中(可拼车)'){
           zt = '7'
+      }else if(values.zt == '休假'){
+          zt = '8'
       }
       let sj = values.sj.trim();
       let cph = values.cph.trim();

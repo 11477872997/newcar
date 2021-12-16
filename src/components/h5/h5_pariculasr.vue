@@ -10,8 +10,18 @@
         </van-search>
       </van-col>
     </van-row>
+<!-- <div  class="box-RN">
+    <van-list
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="onLoad"
+    >
+  <van-cell v-for="item in lists" :key="item" :title="item" />
+</van-list>
+</div> -->
     <!-- 搜索后的展示数据  -->
-    <div v-if="list.length>0" class="box-RN">
+    <div v-if="list.length>0" class="box-RN"> 
       <van-row type="flex" class="ME-box BOXshadow bg mT" v-for="item in list" :key="item.id">
         <van-col :span="24">
           <van-card
@@ -31,9 +41,16 @@
           </van-card>
         </van-col>
       </van-row>
-    </div>
+    </div> 
     <!-- 原本展示数据 -->
     <div v-else class="box-RN">
+          <!-- <van-list
+      v-model="loading"
+      :finished="finished"
+      direction="down"
+      finished-text="没有更多了"
+      @load="onlong"
+    > -->
       <van-row type="flex" class="ME-box BOXshadow bg mT" v-for="item in mydae" :key="item.id">
         <van-col :span="24">
           <van-card
@@ -53,6 +70,7 @@
           </van-card>
         </van-col>
       </van-row>
+       <!-- </van-list> -->
     </div>
   </div>
 </template>
@@ -82,10 +100,15 @@ export default {
       list: [],
       // 原本展示数据
       mydae: [],
+      loading: false,
+      finished: false,
     };
   },
   //方法集合
   methods: {
+    // onlong(){
+    //  console.log(12)
+    // },
     cdgl(){
       //车辆管理
        this.$router.push({ path: "/h5_setcar",}); ///跳转详细页面
@@ -143,7 +166,7 @@ export default {
       
     //   管理员
     // 未派订单列表数据
-    if(this.objname.zt == 3 && this.objname.name == 'wp' && this.objname.qx == 'admin'){
+    if(this.objname.zt == '3' && this.objname.name == 'wp' && this.objname.qx == 'admin'){
          dpdFindAll({}).then((res) => {
             this.mydae = res.data;
              this.flagd = true;
@@ -152,7 +175,7 @@ export default {
     }
     // 提交人
     // 未派订单列表数据
-    if(this.objname.zt == 3 && this.objname.name == 'wp' && this.objname.qx == 'user'){
+    if(this.objname.zt == '3' && this.objname.name == 'wp' && this.objname.qx == 'user'){
          api_ycrxmFindAll({ycrxm:this.$store.state.username,zt:"3"}).then((res) => {
             this.mydae = res.data;
              this.flagd = false;
@@ -161,7 +184,7 @@ export default {
     }
  //   管理员
     // 已派订单列表数据
-    if(this.objname.zt == 4 && this.objname.name == 'yp' && this.objname.qx == 'admin'){
+    if(this.objname.zt == '4' && this.objname.name == 'yp' && this.objname.qx == 'admin'){
          ypdFindAll({}).then((res) => {
             this.mydae = res.data;
              this.flagd = true;
@@ -170,9 +193,10 @@ export default {
     }
      // 提交人
     // 已派订单列表数据
-    if(this.objname.zt == 4 && this.objname.name == 'yp' && this.objname.qx == 'user'){
+    if(this.objname.zt == '4'&& this.objname.name == 'yp' && this.objname.qx == 'user'){
          api_ycrxmFindAll({ycrxm:this.$store.state.username,zt:"4"}).then((res) => {
             this.mydae = res.data;
+            console.log(this.mydae)
             this.flagd = false;
         });
         return false;

@@ -69,6 +69,10 @@ return {
           value: "7",
           label: "待勤中(可拼车)",
         },
+        {
+          value: "8",
+          label: "休假",
+        },
       ],
 };
 },
