@@ -37,6 +37,7 @@ function api_count() {
           let data = res.data[0];
           store.state.Did_not_send =  data.wp;   //未派
            store.state.Have_sent =  data.yp ;  //已派
+           store.state.dd_car =  data.dc ;  //已派
           
           
       })
@@ -311,6 +312,61 @@ function api_getAllUser(data) {
         data
     })
 }
+
+/**
+ * 
+ * @param {*} 获取当前司机执行的订单
+ * @returns uerid
+ */
+function api_getAllyc(data) { 
+    const url = 'sj/getAllYC';
+    return request({
+        url: url,
+        method: 'post',
+        data
+    })
+}
+/**
+ * 
+ * @param {*} 修改订单为等待
+ * @returns id
+ */
+ function api_updateZTToDC(data) { 
+    const url = 'yc/updateZTToDC';
+    return request({
+        url: url,
+        method: 'post',
+        data
+    })
+}
+/**
+ * 
+ * @param {*} 获取等待所有订单信息
+ * @returns 
+ */
+ function api_getAllDC(data) { 
+    const url = 'yc/getAllDC';
+    return request({
+        url: url,
+        method: 'post',
+        data
+    })
+}
+
+/**
+ * 
+ * @param {*} 获取等待所有订单信息
+ * @returns 
+ */
+ function api_getAllDCadata() {
+    const url = 'yc/getAllDC';
+    return request({
+        url: url,
+        method: 'post'
+    }).then((res) => {
+        store.state.ddtableData = res.data // 等待订单列表数据
+    });
+}
 export {
     api_login,
     api_count,
@@ -334,5 +390,9 @@ export {
     count,
     api_getUser,
     api_ycztUpdate,
-    api_getAllUser
+    api_getAllUser,
+    api_getAllyc,
+    api_updateZTToDC,
+    api_getAllDC,
+    api_getAllDCadata
 }

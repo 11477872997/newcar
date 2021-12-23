@@ -40,7 +40,7 @@ const service = axios.create({
 baseURL:url,
 // baseURL: process.env.VUE_APP_BASE_API, // 线上环境
 //延迟
-  timeout: 15000
+  timeout: 50000
 })
 
 

@@ -190,8 +190,15 @@
               >发送</van-button
             >
           </van-col>
+          <van-col span="9"  v-if="ddcl">
+           <van-button native-type="button" icon="passed"  class="BOXradius"    type="info" @click="onddcl(item.id)">
+                等待
+            </van-button>
+          </van-col>
+            
         </van-row>
       </van-form>
+     
     </div>
   </div>
 </template>
@@ -205,6 +212,7 @@ import {
   getCPHAndSJXM,
   api_pcdUpdate,
   api_getAllUser,
+  api_updateZTToDC
 } from "../../../start/api/index.js";
 export default {
   name: "xqym_admin",
@@ -228,6 +236,7 @@ export default {
       show: false,
       showmdd: false,
       rysl: false,
+      ddcl: false,  //等车
       ryslarr: [],
       arrname: [],
       actions: require("../../../start/json/actions.json"),
@@ -239,6 +248,26 @@ export default {
   watch: {},
   //方法集合
   methods: {
+    onddcl(id){
+      function getCookie(name) {
+        //获取cookie
+        var arr,
+          reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if ((arr = document.cookie.match(reg))) return unescape(arr[2]);
+        else return null;
+      }
+      //等待车辆
+      api_updateZTToDC({id:id}).then((res) => {
+        Notify({ type: "success", message: "处理成功" });
+        if (getCookie("userid") == undefined) {
+          this.$router.go(-2);
+          return false;
+        }
+        this.$router.push({ path: "/h5_me" });
+      });
+    
+      console.log(id)
+    },
     onshowyjycsj(time){  //预计有车时间
         //年月日
       let youWant =
@@ -375,6 +404,7 @@ export default {
         Notify({ type: "danger", message: "司机和车牌号不能为空" });
         return false;
       }
+      
       //发送
       //修改订单
       api_pcdUpdate({
@@ -431,6 +461,10 @@ export default {
   mounted() {
     this.mydaeFN();
     this.AndSJXM();
+// 判断状态
+    if(this.$parent.$route.query.zt != '4'){
+      this.ddcl = true;
+    }
   },
   beforeCreate() {}, //生命周期 - 创建之前
   beforeMount() {}, //生命周期 - 挂载之前

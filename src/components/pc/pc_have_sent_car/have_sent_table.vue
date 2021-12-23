@@ -25,6 +25,7 @@
             <template slot-scope="scope">
               <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
               <el-button @click="scopeClick(scope.row)" type="text" size="small">详情</el-button>
+              <el-button @click="scqxdd(scope.row)" type="text" size="small">取消</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -63,7 +64,7 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import { api_ypdFindAll} from '../../../start/api/index.js'
+import { api_ypdFindAll,api_ycztUpdate} from '../../../start/api/index.js'
 import exportExcel from "../../../start/js/excel.js";
 import havesentScopeClick from './have_sentScopeClick.vue'
 import havesentmodeAlet from './have-sent_modeAlet.vue'
@@ -110,6 +111,39 @@ methods: {
      scopeClick(row) {   //查看详情
          this.$refs.didScopeClick.parentHandleclick(row);
       },
+     scqxdd(row) {
+      //取消订单
+      this.$confirm("您确定取消这个订单吗, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          api_ycztUpdate({
+            zt: "2",
+            ycid: row.id,
+          }).then((res) => {
+            if (res.data == true) {
+              this.$message({
+                type: "success",
+                message: "取消成功!",
+              });
+            } else if (res.data == false) {
+              this.$message({
+                type: "info",
+                message: "取消失败",
+              });
+            }
+             api_ypdFindAll();
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "取消失败",
+          });
+        });
+    },
        dcExcle() {
       //导出数据
       let jsonData = this.dataListSelections;

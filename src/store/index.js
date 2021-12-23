@@ -9,6 +9,7 @@ const store = new Vuex.Store({
         username: '', //用户名
         Did_not_send:"",//未派车
         Have_sent:'',//已派车,
+        dd_car:'',//等待车,
         tabsItem: {     //保存刷新的tab的值
             currTabsItem: "",
             currTabsPath: "",
@@ -18,6 +19,7 @@ const store = new Vuex.Store({
         tableData:[],  //车辆管理表格数据
         DidtableData:[],  //待派车表格数据
         haveSenttableData:[],  //已派车表格数据
+        ddtableData:[],  //等待车辆表格数据
     },
     mutations: {
         setTabsItem(state, value) {   //保存刷新的tab的值

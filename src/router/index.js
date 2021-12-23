@@ -80,6 +80,15 @@ const router = new Router({
                         roles: ['admin']
                     },
                 },
+                {   //pc端等待车
+                    path: '/pc_dd_car',
+                    name: "pc_dd_car",
+                    component: () => import('../views/pc/pc_dd_car'),
+                    meta: {
+                        title: '等待车',
+                        roles: ['admin']
+                    },
+                },
                 {   //pc端车辆管理
                     path: '/pc_setCar',
                     name: "pc_setCar",
@@ -184,6 +193,15 @@ const router = new Router({
                 roles: ['admin', 'user']
             },
         },
+        {   //h5等待订单
+            path: '/h5_dd',
+            name: "h5_dd",
+            component: () => import('../views/h5/h5_dd'),
+            meta: {
+                title: '等待订单',
+                roles: ['admin', 'user']
+            },
+        },
         {   //h5车辆状态
             path: '/h5_carzt',
             name: "h5_carzt",
@@ -191,6 +209,15 @@ const router = new Router({
             meta: {
                 title: '车辆状态',
                 roles: ['admin', 'user']
+            },
+        },
+        {   //h5司机任务订单
+            path: '/h5_rwdd',
+            name: "h5_rwdd",
+            component: () => import('../views/h5/h5_rwdd'),
+            meta: {
+                title: '车辆状态',
+                roles: ['admin', 'user', 'SJ']
             },
         },
         {   // 公共详情

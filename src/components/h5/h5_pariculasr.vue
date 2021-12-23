@@ -10,16 +10,6 @@
         </van-search>
       </van-col>
     </van-row>
-<!-- <div  class="box-RN">
-    <van-list
-      v-model="loading"
-      :finished="finished"
-      finished-text="没有更多了"
-      @load="onLoad"
-    >
-  <van-cell v-for="item in lists" :key="item" :title="item" />
-</van-list>
-</div> -->
     <!-- 搜索后的展示数据  -->
     <div v-if="list.length>0" class="box-RN"> 
       <van-row type="flex" class="ME-box BOXshadow bg mT" v-for="item in list" :key="item.id">
@@ -44,13 +34,6 @@
     </div> 
     <!-- 原本展示数据 -->
     <div v-else class="box-RN">
-          <!-- <van-list
-      v-model="loading"
-      :finished="finished"
-      direction="down"
-      finished-text="没有更多了"
-      @load="onlong"
-    > -->
       <van-row type="flex" class="ME-box BOXshadow bg mT" v-for="item in mydae" :key="item.id">
         <van-col :span="24">
           <van-card
@@ -65,18 +48,17 @@
             <template #footer>
               <van-button size="normal"  type="info"  @click="cdgl" v-if="flagd">车辆管理</van-button>
               <van-button size="normal"  type="info" @click="xqyem(item.id)">详情</van-button>
-              <van-button size="normal"  type="info" @click="qxdd(item.id)" >取消订单</van-button>
+              <van-button size="normal"  type="info" @click="qxdd(item.id)"  v-if="qxddsj">取消订单</van-button>
             </template>
           </van-card>
         </van-col>
       </van-row>
-       <!-- </van-list> -->
     </div>
   </div>
 </template>
 
 <script>
-import {dpdFindAll,api_ycrxmFindAll,ypdFindAll,api_ycztUpdate} from '../../start/api/index.js'
+import {dpdFindAll,api_ycrxmFindAll,ypdFindAll,api_ycztUpdate,api_getAllyc,api_getAllDC} from '../../start/api/index.js'
 import { Dialog,Notify } from 'vant';
 export default {
     props: {
@@ -102,6 +84,7 @@ export default {
       mydae: [],
       loading: false,
       finished: false,
+      qxddsj:true,
     };
   },
   //方法集合
@@ -196,12 +179,31 @@ export default {
     if(this.objname.zt == '4'&& this.objname.name == 'yp' && this.objname.qx == 'user'){
          api_ycrxmFindAll({ycrxm:this.$store.state.username,zt:"4"}).then((res) => {
             this.mydae = res.data;
-            console.log(this.mydae)
             this.flagd = false;
         });
         return false;
     }
+   //   管理员
+    // 等待订单列表数据
+    if(this.objname.zt == '4' && this.objname.name == 'dc' && this.objname.qx == 'admin'){
+         api_getAllDC({}).then((res) => {
+            this.mydae = res.data;
+            this.flagd = true;
+        });
+        return false;
+    }
 
+      // 司机任务订单
+    // 
+    if(this.objname.zt == '4'&& this.objname.name == 'rwdd' && this.objname.qx == 'user'){
+         api_getAllyc({userid:sessionStorage.getItem('userid')}).then((res) => {
+          //  console.log(res)
+            this.mydae = res.data;
+            this.flagd = false;
+            this.qxddsj = false;
+        });
+        return false;
+    }
 
 
     },

@@ -10,8 +10,9 @@
     "ico": "el-icon-location",
     "text": "派车",
     "menu": [
-      { "id": "pcDpc", "index": "/pc_did_not_car", "text": "待派车" , "ico": "el-icon-thumb"},
-      { "id": "1-2", "index": "/pc_have_sent_car", "text": "已派车" , "ico": "el-icon-thumb"}
+      { "id": "1-1", "index": "/pc_did_not_car", "text": "待派车" , "ico": "el-icon-thumb"},
+      { "id": "1-2", "index": "/pc_dd_car", "text": "等待车" , "ico": "el-icon-thumb"},
+      { "id": "1-3", "index": "/pc_have_sent_car", "text": "已派车" , "ico": "el-icon-thumb"}
     ]
   },
   {

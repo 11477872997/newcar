@@ -1,0 +1,124 @@
+<!-- 等派车查询 -->
+<template>
+<div class='didSelect'>
+    <el-row :model="from" :gutter="20" >
+      <el-col :span="4">
+        <el-date-picker
+          :style="{width:'100%'}"
+          v-model="from.ycsj"
+          type="datetime"
+          format="yyyy-MM-DD hh:mm"
+          value-format="yyyy-MM-DD hh:mm"
+          placeholder="选择日期时间"
+        ></el-date-picker>
+      </el-col>
+      <el-col :span="7">
+        <el-select v-model="from.cfd" placeholder="请选择/输入出发地" filterable @blur="selectBlurcfd" :style="{width:'100%'}">
+                <el-option
+                v-for="item in options"
+                :key="item.value"
+                :value="item.value">
+                </el-option>
+            </el-select>
+      </el-col>
+      <el-col :span="7">
+          <el-select v-model="from.mdd" placeholder="请选择/输入目的地" filterable @blur="selectBlurmdd" :style="{width:'100%'}">
+                <el-option
+                v-for="item in options"
+                :key="item.value"
+                :value="item.value">
+                </el-option>
+            </el-select>
+      </el-col>
+      <el-col :span="4">
+        <el-input v-model="from.ry">
+          <template slot="prepend">人员</template>
+        </el-input>
+      </el-col>
+      <el-col :span="2">
+        <el-button type="primary" icon="el-icon-search" @click="onSubmit">搜索</el-button>
+      </el-col>
+    </el-row>
+</div>
+</template>
+
+<script>
+//这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
+//例如：import 《组件名称》 from '《组件路径》';
+import { api_selectycbdcx2} from '../../../start/api/index.js'
+export default {
+  name: 'didSelect',
+//import引入的组件需要注入到对象中才能使用
+components: {},
+data() {
+//这里存放数据
+return {
+       from: {
+        //查询
+        ycsj: "",
+        cfd: "",
+        mdd: "",
+        ry: "",
+        cph: "",
+      },
+        options: [   //出发地和目的的
+          {  value: '吉祥路',  }, 
+          {  value: '豪贤路', },
+          {  value: '市府', }, 
+          {  value: '环市路468大院', },
+          {  value: '体育东省厅'},
+          {  value: ' 白云分院(白云大道)'},
+          {  value: '天河分院'},
+          {  value: '番禺分院'},
+          {  value: '南沙分院'}
+        ],
+};
+},
+//监听属性 类似于data概念
+computed: {},
+//监控data中的数据变化
+watch: {},
+//方法集合
+methods: {
+ onSubmit() {
+     console.log(12)
+      //查询
+      api_selectycbdcx2({
+          ycsj: this.from.ycsj,
+          ry: this.from.ry,
+          cfd: this.from.cfd,
+          mdd: this.from.mdd,
+          cph: this.from.cph,
+          zt: '等车'
+      }).then((res) => {
+             this.$store.state.ddtableData = res.data // 等待订单列表数据
+         
+        })
+    },
+     selectBlurcfd(e){  //出发地
+                this.from.cfd = e.target.value;
+    },
+    selectBlurmdd(e){  //目的地
+            this.from.mdd = e.target.value;
+    }
+},
+//生命周期 - 创建完成（可以访问当前this实例）
+created() {
+
+},
+//生命周期 - 挂载完成（可以访问DOM元素）
+mounted() {
+
+},
+beforeCreate() {}, //生命周期 - 创建之前
+beforeMount() {}, //生命周期 - 挂载之前
+beforeUpdate() {}, //生命周期 - 更新之前
+updated() {}, //生命周期 - 更新之后
+beforeDestroy() {}, //生命周期 - 销毁之前
+destroyed() {}, //生命周期 - 销毁完成
+activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
+}
+</script>
+<style  scoped>
+
+</style>

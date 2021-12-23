@@ -1,10 +1,7 @@
 <!-- 我的菜单 -->
 <template>
 <div class='me_men'>
-    <van-grid :gutter="3" :column-num="3">
-        <van-grid-item v-for="item in mydata" :key="item.id" :icon="item.icon" :to="item.to" :text="item.text" :badge="item.badge" />
-      </van-grid>
-      <div class=""  v-if="falg">
+   <div class=""  v-if="falg">
         <van-notice-bar
           left-icon="volume-o"
           scrollable 
@@ -12,6 +9,10 @@
         />
         <van-button style="margin:15px" :type=typename @click="xgzt()">{{namezt}}</van-button>
       </div>
+    <van-grid :gutter="3" :column-num="3">
+        <van-grid-item v-for="item in mydata" :key="item.id" :icon="item.icon" :to="item.to" :text="item.text" :badge="item.badge" />
+      </van-grid>
+     
      
 </div>
 </template>
@@ -19,7 +20,7 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import {count,api_ycrxmFindAll,api_selectdqcl,api_clxxUpdate} from '../../../start/api/index.js'
+import {count,api_ycrxmFindAll,api_selectdqcl,api_clxxUpdate,api_getAllyc} from '../../../start/api/index.js'
 import { Notify ,Dialog} from "vant";
 export default {
   name: 'me_men',
@@ -48,6 +49,7 @@ methods: {
           if(per == 'admin'){
             this.mydata = require('../../../start/json/h5_admin.json');
             count({}).then((res)=>{
+                let dc = res.data[0].dc;
                 let wp = res.data[0].wp;
                 let yp = res.data[0].yp;
                 for(let i = 0 ;i<this.mydata.length;i++){
@@ -57,6 +59,9 @@ methods: {
                   if( this.mydata[i].text  == '已派车'){
                       this.mydata[i].badge = yp
                   };
+                  if( this.mydata[i].text  == '等待车'){
+                      this.mydata[i].badge = dc
+                  };
                   
                 }
               
@@ -64,10 +69,14 @@ methods: {
             return false;  
           }
           if(per == 'SJ'){
-            this.falg = true;
+             this.mydata = require('../../../start/json/h5_dirver.json');
+                // console.log()
+              api_getAllyc({userid:sessionStorage.getItem('userid') }).then((res) => { 
+                this.mydata[0].badge = res.data.length;
+              });
+             this.falg = true;
              api_selectdqcl({id:sessionStorage.getItem('userid') }).then((res) => {
                this.sjdata = res.data.result;
-              
                if(res.data.result.zt == '6'){
                  this.typename = 'primary';
                   this.namezt = '待勤';
@@ -79,11 +88,6 @@ methods: {
                    this.namezt = '可拼车';
                }
               });
-            // this.mydata = require('../../../start/json/h5_dirver.json');
-            // for(let i = 0 ;i<this.mydata.length;i++){
-            //       //  this.mydata[i].to = '/h5_clxqye?id=10000'
-            //       this.mydata[i].to = '/h5_clxqye?id='+sessionStorage.getItem('userid')
-            //       }
             return false;  
           }
           if(per == 'user'){

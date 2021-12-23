@@ -153,6 +153,7 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="cancel">取 消</el-button>
         <el-button type="primary" @click="conserve(iddate.id)">发送</el-button>
+        <el-button type="primary" @click="onddxx(iddate.id)">等待</el-button>
       </span>
       <div class="TXLE">
             <el-row>
@@ -202,7 +203,7 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import { api_idFindAll,api_pcdUpdate,api_dpdFindAll,api_count,api_getAllUser} from '../../../start/api/index.js'
+import { api_getAllDCadata,api_updateZTToDC,api_idFindAll,api_pcdUpdate,api_dpdFindAll,api_count,api_getAllUser} from '../../../start/api/index.js'
 export default {
   name: 'did_not_modeAlet',
 //import引入的组件需要注入到对象中才能使用
@@ -308,6 +309,23 @@ methods: {
 
 
   },
+  onddxx(id){
+    //等待订单
+    console.log(id)
+     api_updateZTToDC({
+        id: id,
+      }).then((res) => {
+        this.$message({
+            message: "发送成功，订单已经到等待订单列表",
+            type: "success",
+          });
+         this.cancel();
+         api_dpdFindAll({});
+         api_count({});
+         api_getAllDCadata()
+      });
+
+  },
     selectBlurcfd(e){  //出发地
       this.iddate.cfd = e.target.value;
     },
@@ -319,7 +337,6 @@ methods: {
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
  api_getAllUser().then((res) =>{
- 
     this.ryslarr = res.data;
   })
 },

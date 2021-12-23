@@ -183,6 +183,7 @@ Vue.prototype.$message = Message;
 // 修改 el-dialog 默认点击遮照为不关闭
 Dialog.props.closeOnClickModal.default = false;
 
+
 // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
 export default {
     install

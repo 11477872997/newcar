@@ -1,11 +1,11 @@
 <!-- 待派车表格 -->
 <template>
-  <div class="did_not_table">
+  <div class="didtable">
     <el-row>
       <el-col :span="24">
         <el-table
           :data="
-            this.$store.state.DidtableData.slice(
+            this.$store.state.ddtableData.slice(
               (currentPage - 1) * pagesize,
               currentPage * pagesize
             )
@@ -70,13 +70,13 @@
           :page-sizes="[10, 20, 30, 40]"
           :page-size="pagesize"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="this.$store.state.DidtableData.length"
+          :total="this.$store.state.ddtableData.length"
           background
         ></el-pagination>
       </el-col>
     </el-row>
     <didModeAlet ref="mychild" />
-    <didScopeClick ref="didScopeClick" />
+    <didScopeClick ref="didScopeClick" /> 
   </div>
 </template>
 
@@ -84,14 +84,14 @@
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 import {
-  api_dpdFindAll,
-  api_pccxsyFindAll,
-  api_ycztUpdate,
+api_getAllDCadata,
+api_ycztUpdate
 } from "../../../start/api/index.js";
-import didModeAlet from "./did_not_modeAlet.vue";
-import didScopeClick from "./did_scopeClick.vue";
+import didModeAlet from "../pc_have_sent_car/have-sent_modeAlet.vue";
+import didScopeClick from "../pc_did_not_car/did_scopeClick.vue";
+
 export default {
-  name: "did_not_table",
+  name: "didtable",
   //import引入的组件需要注入到对象中才能使用
   components: {
     didModeAlet,
@@ -152,7 +152,7 @@ export default {
                 message: "取消失败",
               });
             }
-            api_dpdFindAll({});
+            api_getAllDCadata({});
           });
         })
         .catch(() => {
@@ -167,8 +167,7 @@ export default {
   created() {},
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {
-    api_dpdFindAll();
-    api_pccxsyFindAll({});
+  api_getAllDCadata({});
   },
   beforeCreate() {}, //生命周期 - 创建之前
   beforeMount() {}, //生命周期 - 挂载之前

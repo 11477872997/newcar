@@ -1,21 +1,26 @@
 <!-- 左边头像 -->
 <template>
   <div class="Headers">
-    <el-row :gutter="20">
+    <el-row >
       <el-col :span="6">
-        <el-badge :value="this.$store.state.Did_not_send" class="item" >
-          <el-button size="small" @click="Did_not_send()">未派车</el-button>
+        <el-badge :value="this.$store.state.Did_not_send" >
+          <el-button size="small" >未派车</el-button>
         </el-badge>
       </el-col>
       <el-col :span="6">
-        <el-badge :value="this.$store.state.Have_sent" class="item" type="primary">
-          <el-button size="small" @click="Have_sent()">已派车</el-button>
+        <el-badge :value="this.$store.state.dd_car"  >
+          <el-button size="small" >等待车</el-button>
         </el-badge>
-      </el-col>
-      <el-col :span="4">
+      </el-col> 
+      <el-col :span="6">
+        <el-badge :value="this.$store.state.Have_sent"  type="primary">
+          <el-button size="small">已派车</el-button>
+        </el-badge>
+      </el-col> 
+      <!-- <el-col :span="2">
         <el-avatar :src="admin_img"></el-avatar>
-      </el-col>
-      <el-col :span="8">
+      </el-col> -->
+      <el-col :span="4">
         <el-dropdown @command="handleCommand" class="tabsAdmin">
           <span class="el-dropdown-link">
             {{ this.$store.state.username}}
@@ -59,14 +64,14 @@ export default {
         });
       }
     },
-    Have_sent() {
-      //已派
-      this.$router.push({ path: "/pc_have_sent_car" });
-    },
-    Did_not_send() {
-      //未派
-      this.$router.push({ path: "/pc_did_not_car" });
-    },
+    // Have_sent() {
+    //   //已派
+    //   this.$router.push({ path: "/pc_have_sent_car" });
+    // },
+    // Did_not_send() {
+    //   //未派
+    //   this.$router.push({ path: "/pc_did_not_car" });
+    // },
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
