@@ -240,6 +240,21 @@ cancel(){  //取消
      this.centerDialogVisible = false;
   },
   conserve(id){  //保存
+  // console.log(id)
+    if(this.iddate.sj == ''){
+    this.$message({
+            message: "司机不能为空",
+            type: "success",
+          });
+      return false;
+  }
+  if(this.iddate.cph == ''){
+    this.$message({
+            message: "车牌号不能为空",
+            type: "success",
+          });
+      return false;
+  }
    api_pcdUpdate({
         id: id,
         ycsj: this.iddate.ycsj,

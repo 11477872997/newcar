@@ -22,6 +22,13 @@
     },
     {
         "id": "3",
+        "text": "等待车",
+        "badge":"",
+        "icon":"description",
+        "to":"/h5_dd"
+    },
+    {
+        "id": "4",
         "text": "车辆状态",
         "badge":"",
         "icon":"records",

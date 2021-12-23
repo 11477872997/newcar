@@ -109,6 +109,15 @@ methods: {
                               };
                       }
             })
+            api_ycrxmFindAll({ycrxm: ycrxm, zt: "9" }).then((res)=>{
+                  let dc = res.data.length;
+                      for(let i = 0 ;i<this.mydata.length;i++){
+                              if( this.mydata[i].text  == '等待车'){
+                                  this.mydata[i].badge = dc
+
+                              };
+                      }
+            })
               return false; 
 
           }

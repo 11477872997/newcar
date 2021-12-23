@@ -192,6 +192,15 @@ export default {
         });
         return false;
     }
+  // 提交人
+   // 已派订单列表数据
+    if(this.objname.zt == '4'&& this.objname.name == 'dc' && this.objname.qx == 'user'){
+         api_ycrxmFindAll({ycrxm:this.$store.state.username,zt:"9"}).then((res) => {
+            this.mydae = res.data;
+            this.flagd = false;
+        });
+        return false;
+    }
 
       // 司机任务订单
     // 

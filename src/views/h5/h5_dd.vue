@@ -28,7 +28,7 @@ return {
     propsObj: {
         zt: 4,
         name: "dc",
-        qx:'admin'
+        qx:''
     },
     
 };
@@ -43,7 +43,7 @@ methods: {
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-
+    this.propsObj.qx =  sessionStorage.getItem('per');  //根据用户访问路由权限
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
