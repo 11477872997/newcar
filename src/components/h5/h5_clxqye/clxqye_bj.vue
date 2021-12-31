@@ -86,7 +86,7 @@ data() {
 //这里存放数据
 return {
       mydate: [],
-      sjs: ["出勤", "待勤", "待勤中(可拼车)","休假"],
+      sjs: [],
       sj: "",
       showPicker3: false,
 };
@@ -109,35 +109,30 @@ methods: {
     mydaeFN() {
       //查询当前车辆
       let id = this.$route.query.id;
+      let resdata = require('../../../start/json/zt.json')
      api_selectdqcl({id: id }).then((res) => {
-            
-            if(res.data.result.zt == '5'){
-                res.data.result.zt = '出勤'
-              }else if(res.data.result.zt == '6'){
-                 res.data.result.zt = '待勤'
-              }else if(res.data.result.zt == '7'){
-                  res.data.result.zt = '待勤中(可拼车)'
-              }else if(res.data.result.zt == '8'){
-                  res.data.result.zt = '休假'
-              }
+        for(let i = 0;i<resdata.length;i++){
+           this.sjs.push( resdata[i].label);
+            if(resdata[i].value == res.data.result.zt){
+              res.data.result.zt = resdata[i].label;
+            }
+        }
             this.mydate = res.data.result;
         });
     },
     onSubmit(values) {
-      //保存
-      let zt = '';
-      if(values.zt == '出勤'){
-          zt = '5'
-      }else if(values.zt == '待勤'){
-          zt = '6'
-      }else if(values.zt == '待勤中(可拼车)'){
-          zt = '7'
-      }else if(values.zt == '休假'){
-          zt = '8'
+      
+     let resdata = require('../../../start/json/zt.json')
+      for(let i = 0 ;i<resdata.length;i++){
+        if(resdata[i].label == values.zt){
+              values.zt = resdata[i].value;
+          }
       }
+      //保存
       let sj = values.sj.trim();
       let cph = values.cph.trim();
       let dhhm = values.dhhm.trim();
+      let zt = values.zt.trim();
       let id =  this.mydate.id;
       //选染
       api_clxxUpdate({

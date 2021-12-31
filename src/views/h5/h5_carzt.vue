@@ -8,6 +8,8 @@
             <span class="custom-title">司机:{{item.sj}}</span>
             <van-tag v-if="item.zt === '出勤'" type="danger">{{item.zt}}</van-tag>
             <van-tag v-else-if="item.zt === '待勤'" type="success">{{item.zt}}</van-tag>
+            <van-tag v-else-if="item.zt === '休假'" type="success">{{item.zt}}</van-tag>
+            <van-tag v-else-if="item.zt === '出差'" type="success">{{item.zt}}</van-tag>
             <van-tag v-else   type="primary">{{item.zt}}</van-tag>
         </template>
         </van-cell>

@@ -56,24 +56,7 @@ data() {
 return {
     centerDialogVisible:false,
     iddate:[], //当前车辆数据
-    options: [
-        {
-          value: "6",
-          label: "待勤",
-        },
-        {
-          value: "5",
-          label: "出勤",
-        },
-        {
-          value: "7",
-          label: "待勤中(可拼车)",
-        },
-        {
-          value: "8",
-          label: "休假",
-        },
-      ],
+    options:require('../../../start/json/zt.json')
 };
 },
 //监听属性 类似于data概念
