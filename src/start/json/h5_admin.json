@@ -43,9 +43,9 @@
     },
     {
         "id": "6",
-        "text": "车辆状态",
+        "text": "当日司机订单",
         "badge":"",
         "icon":"records",
-        "to":"/h5_carzt"
+        "to":"/h5_carztdamin"
     }
 ]

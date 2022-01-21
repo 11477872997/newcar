@@ -367,6 +367,18 @@ function api_getAllyc(data) {
         store.state.ddtableData = res.data // 等待订单列表数据
     });
 }
+/**
+ * 
+ * @param {*} 获取当日所有司机订单
+ * @returns 
+ */
+ function api_getAllSJToday() {
+    const url = 'gl/getAllSJToday';
+    return request({
+        url: url,
+        method: 'post'
+    })
+}
 export {
     api_login,
     api_count,
@@ -394,5 +406,6 @@ export {
     api_getAllyc,
     api_updateZTToDC,
     api_getAllDC,
-    api_getAllDCadata
+    api_getAllDCadata,
+    api_getAllSJToday
 }

@@ -211,6 +211,15 @@ const router = new Router({
                 roles: ['admin', 'user']
             },
         },
+        {   //h5车辆状态 管理员
+            path: '/h5_carztdamin',
+            name: "h5_carztdamin",
+            component: () => import('../views/h5/h5_carztdamin'),
+            meta: {
+                title: '车辆状态',
+                roles: ['admin', 'user']
+            },
+        },
         {   //h5司机任务订单
             path: '/h5_rwdd',
             name: "h5_rwdd",

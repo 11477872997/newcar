@@ -27,7 +27,7 @@ import {
     Grid, 
     GridItem,
     ActionSheet,
-    List 
+    List
 } from "vant";
 
 // 存储组件列表
