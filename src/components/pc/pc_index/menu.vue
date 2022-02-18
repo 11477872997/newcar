@@ -69,6 +69,7 @@ export default {
   //方法集合
   methods: {
     setCurrentRoute() {
+      
       //刷新页面选中当前路由
       this.activeIndex = this.$route.path; // 通过他就可以监听到当前路由状态并激活当前菜单
     },
