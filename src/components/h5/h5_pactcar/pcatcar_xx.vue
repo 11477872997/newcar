@@ -255,7 +255,18 @@ methods: {
         Notify({ type: 'danger', message: '是否等待不能空' });
          return false;
       }
-      api_ycinsert({
+      if(names.ycrs  <= 6){
+        this.getapi(names)
+        return false;
+      }else if(names.ycrs >6){
+        for(var i = 0; i<2;i++){
+          this.getapi(names);
+        }
+      }
+     
+    },
+  getapi(names){
+     api_ycinsert({
         ycsj: names.ycsj,
         ycrs: names.ycrs,
         cfd: names.cfd,
@@ -271,7 +282,7 @@ methods: {
       }).catch((error) => {
            Notify({ type: 'danger', message: '提交失败' });
     });
-    },  
+  },
   convertKey (arr, key) {
     let newArr = [];
     arr.forEach((item, index) => {

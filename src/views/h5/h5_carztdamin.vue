@@ -2,6 +2,19 @@
 <template>
   <div class="h5_carztdamin">
     <Tb :Text="{ ...propsText }"></Tb>
+  
+    <van-row gutter="20" class="carztdaminbtn">
+      <van-col span="8">
+        <van-button block color="linear-gradient(to right, rgb(194 78 105), rgb(166 113 32))" @click="btnythi('今天')">今天</van-button>
+      </van-col>
+      <van-col span="8">
+       <van-button  block color="linear-gradient(to right, rgb(76 202 185), rgb(49 136 72))" @click="btnythi('明天')">明天</van-button>
+        </van-col>
+      <van-col span="8">
+        <van-button block color="linear-gradient(to right, rgb(65 88 86), rgb(76 91 126))" @click="btnythi('后天')">后天</van-button>
+      </van-col>
+
+    </van-row>
     <div
       class="van-cell h5_carztdaminmian"
       v-for="(item, index) in dataAll"
@@ -30,7 +43,7 @@ export default {
     return {
       propsText: {
         num: 1,
-        Titletext: "当日司机订单",
+        Titletext: "最近三天司机订单",
       },
       dataAll: [],
     };
@@ -41,16 +54,18 @@ export default {
   watch: {},
   //方法集合
   methods: {
-    goapi() {
-      api_getAllSJToday().then((res) => {
-        console.log(res);
+    goapi(name) {
+      api_getAllSJToday({name:name}).then((res) => {
         this.dataAll = res.data;
       });
     },
+    btnythi(name){
+       this.goapi(name);
+    }
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    this.goapi();
+    this.goapi("今天");
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
@@ -69,6 +84,9 @@ export default {
   border-top: 2px transparent solid;
   border-image: linear-gradient(to right, #e6daea, #e6e7e8) 2 10;
   margin: 5px 0px 5px 0px;
+}
+.carztdaminbtn{
+  padding: 10px;
 }
 .h5_carztdamibox {
   border-bottom: 1px solid #aaa6a6;

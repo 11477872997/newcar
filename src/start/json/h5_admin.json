@@ -43,7 +43,7 @@
     },
     {
         "id": "6",
-        "text": "当日司机订单",
+        "text": "司机订单列表",
         "badge":"",
         "icon":"records",
         "to":"/h5_carztdamin"

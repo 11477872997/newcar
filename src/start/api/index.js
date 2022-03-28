@@ -372,11 +372,12 @@ function api_getAllyc(data) {
  * @param {*} 获取当日所有司机订单
  * @returns 
  */
- function api_getAllSJToday() {
+ function api_getAllSJToday(data) {
     const url = 'gl/getAllSJToday';
     return request({
         url: url,
-        method: 'post'
+        method: 'post',
+        data
     })
 }
 export {

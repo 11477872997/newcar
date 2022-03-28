@@ -146,7 +146,18 @@ methods: {
         this.$message({ type: 'danger', message: '是否等待不能空' });
          return false;
       }
-      api_ycinsert({
+      if(this.from.ycrs  <= 6){
+        this.getapi(ycrxm)
+        return false;
+      }else if(this.from.ycrs >6){
+        for(var i = 0; i<2;i++){
+          this.getapi(ycrxm);
+        }
+      }
+    
+    },
+    getapi(ycrxm){
+        api_ycinsert({
         ycsj: this.from.ycsj,
         ycrs: this.from.ycrs,
         cfd: this.from.cfd,
@@ -157,7 +168,6 @@ methods: {
         ycrxm: ycrxm,
         userid: sessionStorage.getItem('userid'),
       }).then((res) => {
-        
            this.$message({
             message: "约车成功",
             type: "success",
