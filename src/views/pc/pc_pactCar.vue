@@ -146,13 +146,12 @@ methods: {
         this.$message({ type: 'danger', message: '是否等待不能空' });
          return false;
       }
-      if(this.from.ycrs  <= 6){
-        this.getapi(ycrxm)
-        return false;
-      }else if(this.from.ycrs >6){
+      if(this.from.ycrs  >= 7){
         for(var i = 0; i<2;i++){
           this.getapi(ycrxm);
         }
+      }else {
+        this.getapi(ycrxm)
       }
     
     },

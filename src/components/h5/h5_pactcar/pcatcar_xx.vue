@@ -235,7 +235,6 @@ methods: {
 
     },
  onSubmit(names) {
-      let ycrxm = this.$store.state.username; //约车人
       if(names.ycsj == ""){
         Notify({ type: 'danger', message: '约车时间不能空' });
         return false;
@@ -255,17 +254,17 @@ methods: {
         Notify({ type: 'danger', message: '是否等待不能空' });
          return false;
       }
-      if(names.ycrs  <= 6){
-        this.getapi(names)
-        return false;
-      }else if(names.ycrs >6){
+      if(names.ycrs  >= 7 ){
         for(var i = 0; i<2;i++){
           this.getapi(names);
         }
+      }else{
+        this.getapi(names)
       }
      
     },
   getapi(names){
+      let ycrxm = this.$store.state.username; //约车人
      api_ycinsert({
         ycsj: names.ycsj,
         ycrs: names.ycrs,
